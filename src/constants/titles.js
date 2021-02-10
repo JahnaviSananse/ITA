@@ -1,0 +1,20 @@
+export const DISCOVER = "Discover"
+export const LIBRARY = "Library"
+export const PRODUCTS = "Products"
+export const FLYERS = 'Flyers'
+export const SOCIAL_POSTS = 'Social Posts'
+export const EVOLUTION = "Evolution"
+export const VIDEOS = 'Videos'
+export const RESOURCES = 'Resources'
+export const FUND_PLATFORM = "Fund Platform"
+export const FILTER = "Filter"
+export const RISK_PROFILE = 'Risk Profile'
+export const PROFILE = "Profile"
+export const SETTINGS = "Settings"
+export const LANGUAGE = "Language"
+export const REPORT_AN_ISSUE = "Report an Issue"
+export const NOTIFICATION = 'Notification'
+export const SECURITY = 'Security'
+export const PASSWORD = 'Password'
+export const TOUCH_ID = 'Touch ID'
+

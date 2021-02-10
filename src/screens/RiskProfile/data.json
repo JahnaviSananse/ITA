@@ -1,0 +1,240 @@
+{
+    "items": [
+        {
+            "celldisplay": 1, // 1 - Selection with Text, 2 - Selection, 3 - Multiple selection
+            "celltype": 1,
+            "answer": "",
+            "title": "Who is the client?",
+            "data": [
+                {
+                    "id": 1,
+                    "name": "Male"
+                },
+                {
+                    "id": 2,
+                    "name": "Female"
+                }
+            ]
+        },
+        {
+            "celldisplay": 2, // 1 - Selection with Text, 2 - Selection, 3 - Multiple selection
+            "celltype": 1,
+            "answer": "",
+            "title": "How old you are?",
+            "data": [
+                {
+                    "id": 3,
+                    "name": "Less than",
+                    "age": "35",
+                    "old": "years old"
+                },
+                {
+                    "id": 4,
+                    "name": "Between",
+                    "age": "35 - 55",
+                    "old": "years old"
+                },
+                {
+                    "id": 5,
+                    "name": "More than",
+                    "age": "55",
+                    "old": "years old"
+                }
+            ]
+        },
+        {
+            "celldisplay": 2, // 1 - Selection with Text, 2 - Selection, 3 - Multiple selection
+            "celltype": 1,
+            "answer": "",
+            "title": "Over the next few years, you expect\n your income to?",
+            "data": [
+                {
+                    "id": 6,
+                    "name": "Increse"
+                },
+                {
+                    "id": 7,
+                    "name": "Stay \nthe same"
+                },
+                {
+                    "id": 8,
+                    "name": "Descrese"
+                }
+            ]
+        },
+        {
+            "celldisplay": 2, // 1 - Selection with Text, 2 - Selection, 3 - Multiple selection
+            "celltype": 2,
+            "answer": "",
+            "title": "How much disposable incomde do you have after deducting all monthly expenses ?",
+            "data": [
+                {
+                    "id": 9,
+                    "name": "Around 25% of your monthly income"
+                },
+                {
+                    "id": 10,
+                    "name": "Around 35 % of your monthly income"
+                },
+                {
+                    "id": 11,
+                    "name": "More than half of your monthly income"
+                }
+            ]
+        },
+        {
+            "celldisplay": 2, // 1 - Selection with Text, 2 - Selection, 3 - Multiple selection
+            "celltype": 1,
+            "answer": "",
+            "title": "How long will you keep this investment?",
+            "data": [
+                {
+                    "id": 12,
+                    "name": "Less than",
+                    "age": "2",
+                    "old": "years"
+                },
+                {
+                    "id": 13,
+                    "name": "Between",
+                    "age": "3 - 6",
+                    "old": "years"
+                },
+                {
+                    "id": 14,
+                    "name": "More than",
+                    "age": "7",
+                    "old": "years"
+                }
+            ]
+        },
+        {
+            "celldisplay": 2, // 1 - Selection with Text, 2 - Selection, 3 - Multiple selection
+            "celltype": 2,
+            "answer": "",
+            "title": "what is your investment experience?",
+            "data": [
+                {
+                    "id": 15,
+                    "name": "I have invested in equity or euity funds"
+                },
+                {
+                    "id": 16,
+                    "name": "Did some fixed income investing"
+                },
+                {
+                    "id": 17,
+                    "name": "Limited experience"
+                },
+                {
+                    "id": 18,
+                    "name": "No investment experience at all"
+                }
+            ]
+        },
+        {
+            "celldisplay": 2, // 1 - Selection with Text, 2 - Selection, 3 - Multiple selection
+            "celltype": 2,
+            "answer": "",
+            "title": "what of these statements identify you the most when making investment decisions?",
+            "data": [
+                {
+                    "id": 19,
+                    "name": "I would not accept a capital loss"
+                },
+                {
+                    "id": 20,
+                    "name": "I prefer low risk investmnet"
+                },
+                {
+                    "id": 21,
+                    "name": "I would accept higher risks in order to obtain higher returns"
+                },
+                {
+                    "id": 22,
+                    "name": "I like high-risk invetments with high returns"
+                }
+            ]
+        },
+        {
+            "celldisplay": 2, // 1 - Selection with Text, 2 - Selection, 3 - Multiple selection
+            "celltype": 2,
+            "answer": "",
+            "title": "Due to a general market correction, One of your investment losses 12% of its value, a short time after you buy it. What do you do?",
+            "data": [
+                {
+                    "id": 23,
+                    "name": "Sell immedialtely and avoid a greater loss"
+                },
+                {
+                    "id": 24,
+                    "name": "Sell a portion of your position"
+                },
+                {
+                    "id": 25,
+                    "name": "Hold on to it, as you have a long term strategy in place"
+                },
+                {
+                    "id": 26,
+                    "name": "Buy more of it , as it's priced lower now"
+                }
+            ]
+        },
+        {
+            "celldisplay": 2, // 1 - Selection with Text, 2 - Selection, 3 - Multiple selection
+            "celltype": 2,
+            "answer": "",
+            "title": "Assuming you are investing in only one bond, which of the following three bonds would you choose?",
+            "data": [
+                {
+                    "id": 27,
+                    "name": "A high-yield, low rated(junk) bond. \n Coupon: 12%"
+                },
+                {
+                    "id": 28,
+                    "name": "A bond of a well-established company. \n Coupon: 6%"
+                },
+                {
+                    "id": 29,
+                    "name": "A low yield AAA government bond. \n Coupon: 3%"
+                }
+            ]
+        },
+        {
+            "celldisplay": 4, // 1 - Selection with Text, 2 - Selection, 3 - Multiple selection
+            "celltype": 1,
+            "answer": "",
+            "title": "With a 10 year investment of USD \n10,000, and understanding that seeking higher return also means enduring higher risks, what combination of maximum and minimum end balances are you wiling to accept?",
+            "data": [
+                {
+                    "id": 30,
+                    "name": "Maximum in USD",
+                    "max_amt": "$ 80,000",
+                    "min_usd": "Minimum in USD",
+                    "min_amt": "$ 3,000"
+                },
+                {
+                    "id": 31,
+                    "name": "Maximum in USD",
+                    "max_amt": "$ 40,000",
+                    "min_usd": "Minimum in USD",
+                    "min_amt": "$ 7,000"
+                },
+                {
+                    "id": 32,
+                    "name": "Maximum in USD",
+                    "max_amt": "$ 20,000",
+                    "min_usd": "Minimum in USD",
+                    "min_amt": "$ 9,000"
+                },
+                {
+                    "id": 33,
+                    "name": "Maximum in USD",
+                    "max_amt": "$ 12,000",
+                    "min_usd": "Minimum in USD",
+                    "min_amt": "$ 10,000"
+                }
+            ]
+        }
+    ]
+}

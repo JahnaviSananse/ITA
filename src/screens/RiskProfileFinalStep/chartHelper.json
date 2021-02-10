@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "desc": "Man AHL Diversified Guernsey",
+            "percentage": "10%",
+            "borderColor": "#dadada"
+        },
+        {
+            "id": 2,
+            "desc": "BR EM Bond",
+            "percentage": "10%",
+            "borderColor": "#a7a7a7"
+        },
+        {
+            "id": 3,
+            "desc": "SCH Global Smaller Companies",
+            "percentage": "15%",
+            "borderColor": "#366072"
+        },
+        {
+            "id": 4,
+            "desc": "JH Global HY",
+            "percentage": "20%",
+            "borderColor": "#2fbac6"
+        },
+        {
+            "id": 5,
+            "desc": "MS Global Brands",
+            "percentage": "25%",
+            "borderColor": "#334850"
+        },
+        {
+            "id": 6,
+            "desc": "MS Global Opp",
+            "percentage": "20%",
+            "borderColor": "#8cb4b7"
+        }
+    ]
+}

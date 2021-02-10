@@ -1,0 +1,19 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "question": "What is an Investment Risk Profile ?",
+            "ans": "Investment Risk can be described as the potential for actual investment returns to vary from expectations. The higher the level of investment returns you are seeking, the more risk you generally need to be prepared to accept. Not everyone has the same attitude to risk. An Investment Risk Profile is basically a general description regarding as Investore's attitude to risk."
+        },
+        {
+            "id": 2,
+            "question": "Can my risk profile change?",
+            "ans": "Yes, it is quit likely that your attitude to investment risk will change over time. This may be the result of investment market experience, or charging personal circumstances such as change in employment status, family memders becoming no longer dependent upon you, or receipt of inheritance or lottery win."
+        },
+        {
+            "id": 3,
+            "question": "Important Disclousers",
+            "ans": "The question in this section are purely for the purpose of accessing your attitude to risk and your resk tolerance in connection with investing. There is no direct relationship between the questions asked in this section and actual performance of any investmnets and the income from it can fall as well as rise, as a result of market and currency flucuations and you my not get back the amount originally invested. Nothing contained in this interactive calculator should be constructed as guidence to the suitability of any inveastment. Anyone considering investing in these products should seek professional guidence."
+        }
+    ]
+}
