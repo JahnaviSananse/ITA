@@ -1,30 +1,30 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import React from 'react';
-import {Dimensions} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import * as ICONS from '../resources';
-import * as utility from './../Utility/util';
-import Discover from './Discover';
-import Library from './Library';
-import Profile from './Profile';
-import Resources from './Resources/index';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from "react";
+import { Dimensions } from "react-native";
+import FastImage from "react-native-fast-image";
+import * as ICONS from "../resources";
+import * as utility from "./../Utility/util";
+import Discover from "./Discover";
+import Library from "./Library";
+import Profile from "./Profile";
+import Resources from "./Resources/index";
 const Tab = createBottomTabNavigator();
 const Icon = (name, focused) => {
   let icon = null;
-  if (name === 'Discover') {
+  if (name === "Discover") {
     icon = focused ? ICONS.TB_IC_DISCOVER_SELECTED : ICONS.TB_IC_DISCOVER;
-  } else if (name == 'Library') {
+  } else if (name == "Library") {
     icon = focused ? ICONS.TB_IC_LIBRARY_SELECTED : ICONS.TB_IC_LIBRARY;
-  } else if (name === 'Resources') {
+  } else if (name === "Resources") {
     icon = focused ? ICONS.TB_IC_RESOURCES_SELECTED : ICONS.TB_IC_RESOURCES;
-  } else if (name === 'Profile') {
+  } else if (name === "Profile") {
     icon = focused ? ICONS.TB_IC_PROFILE_SELECTED : ICONS.TB_IC_PROFILE;
   }
   return (
     <FastImage
-      style={{height: 22, width: 22}}
+      style={{ height: 22, width: 22 }}
       source={icon}
-      resizeMode={'contain'}
+      resizeMode={"contain"}
     />
   );
 };
@@ -36,29 +36,30 @@ const MainTabbarScreen = (props) => {
       backBehavior="initialRoute"
       tabBarOptions={{
         style: {
-          backgroundColor: utility.changeBackgroundColor('#FFFFFF'),
+          backgroundColor: utility.changeBackgroundColor("#FFFFFF"),
         },
         showLabel: false,
-      }}>
+      }}
+    >
       <Tab.Screen
         name="Discover"
         component={Discover}
         options={{
-          tabBarIcon: ({color, size, focused}) => Icon('Discover', focused),
+          tabBarIcon: ({ color, size, focused }) => Icon("Discover", focused),
         }}
       />
       <Tab.Screen
         name="Library"
         component={Library}
         options={{
-          tabBarIcon: ({color, size, focused}) => Icon('Library', focused),
+          tabBarIcon: ({ color, size, focused }) => Icon("Library", focused),
         }}
       />
       <Tab.Screen
         name="Resources"
         component={Resources}
         options={{
-          tabBarIcon: ({color, size, focused}) => Icon('Resources', focused),
+          tabBarIcon: ({ color, size, focused }) => Icon("Resources", focused),
         }}
       />
       <Tab.Screen
@@ -66,13 +67,13 @@ const MainTabbarScreen = (props) => {
         component={Profile}
         v
         options={{
-          tabBarIcon: ({color, size, focused}) => Icon('Profile', focused),
+          tabBarIcon: ({ color, size, focused }) => Icon("Profile", focused),
         }}
       />
     </Tab.Navigator>
   );
 };
-const {height} = Dimensions.get('window');
+const { height } = Dimensions.get("window");
 // const MainTabbarScreen = createBottomTabNavigator(
 //   {
 //     Discover: Discover,

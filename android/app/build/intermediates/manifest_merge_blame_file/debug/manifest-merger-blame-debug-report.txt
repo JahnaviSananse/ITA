@@ -1,0 +1,238 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.boilerplate"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+9        android:targetSdkVersion="29" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\debug\AndroidManifest.xml:5:5-77
+11-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\debug\AndroidManifest.xml:5:22-75
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:4:5-67
+12-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:4:22-64
+13    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+13-->[com.facebook.flipper:flipper:0.54.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\2fa344e99fbc8cc928a5b46ed302cce1\jetified-flipper-0.54.0\AndroidManifest.xml:16:5-76
+13-->[com.facebook.flipper:flipper:0.54.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\2fa344e99fbc8cc928a5b46ed302cce1\jetified-flipper-0.54.0\AndroidManifest.xml:16:22-73
+14    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+14-->[:react-native-community_netinfo] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\@react-native-community\netinfo\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-79
+14-->[:react-native-community_netinfo] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\@react-native-community\netinfo\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:22-76
+15
+16    <queries>
+16-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-14:15
+17        <intent>
+17-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:9-13:18
+18            <action android:name="android.media.action.IMAGE_CAPTURE" />
+18-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-73
+18-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:21-70
+19        </intent>
+20    </queries>
+21
+22    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+22-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:5-81
+22-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:22-78
+23    <uses-permission android:name="android.permission.USE_FINGERPRINT" /> <!-- Required to access Google Play Licensing -->
+23-->[:react-native-touch-id] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-touch-id\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-74
+23-->[:react-native-touch-id] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-touch-id\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:22-71
+24    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+24-->[:rn-fetch-blob] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\rn-fetch-blob\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-73
+24-->[:rn-fetch-blob] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\rn-fetch-blob\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:22-70
+25    <!--
+26         Required to keep CPU alive while downloading files
+27        (NOT to keep screen awake)
+28    -->
+29    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+29-->[:rn-fetch-blob] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\rn-fetch-blob\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:5-68
+29-->[:rn-fetch-blob] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\rn-fetch-blob\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:22-65
+30    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+30-->[com.google.android.gms:play-services-iid:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\6753dc31764fb16d59e384b64194b306\jetified-play-services-iid-17.0.0\AndroidManifest.xml:23:5-82
+30-->[com.google.android.gms:play-services-iid:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\6753dc31764fb16d59e384b64194b306\jetified-play-services-iid-17.0.0\AndroidManifest.xml:23:22-79
+31    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+31-->[com.android.installreferrer:installreferrer:1.1.2] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\c38d7fa7606b74363cd749f802b319fe\jetified-installreferrer-1.1.2\AndroidManifest.xml:9:5-110
+31-->[com.android.installreferrer:installreferrer:1.1.2] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\c38d7fa7606b74363cd749f802b319fe\jetified-installreferrer-1.1.2\AndroidManifest.xml:9:22-107
+32
+33    <application
+33-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:6:5-25:19
+34        android:name="com.boilerplate.MainApplication"
+34-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:7:7-38
+35        android:allowBackup="false"
+35-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:11:7-34
+36        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+36-->[androidx.core:core:1.3.2] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\70c29dae7d769418986cf7cdd80f44de\core-1.3.2\AndroidManifest.xml:24:18-86
+37        android:debuggable="true"
+38        android:icon="@mipmap/ic_launcher"
+38-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:9:7-41
+39        android:label="@string/app_name"
+39-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:8:7-39
+40        android:roundIcon="@mipmap/ic_launcher_round"
+40-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:10:7-52
+41        android:testOnly="true"
+42        android:theme="@style/AppTheme"
+42-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:12:7-38
+43        android:usesCleartextTraffic="true" >
+43-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\debug\AndroidManifest.xml:7:18-53
+44        <activity
+44-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:13:7-23:18
+45            android:name="com.boilerplate.MainActivity"
+45-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:14:9-37
+46            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+46-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:16:9-86
+47            android:label="@string/app_name"
+47-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:15:9-41
+48            android:launchMode="singleTask"
+48-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:17:9-40
+49            android:windowSoftInputMode="adjustResize" >
+49-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:18:9-51
+50            <intent-filter>
+50-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:19:9-22:25
+51                <action android:name="android.intent.action.MAIN" />
+51-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:20:13-65
+51-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:20:21-62
+52
+53                <category android:name="android.intent.category.LAUNCHER" />
+53-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:21:13-73
+53-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:21:23-70
+54            </intent-filter>
+55        </activity>
+56        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+56-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:24:7-84
+56-->C:\Users\jahnavi sananse\Desktop\itaconnect\android\app\src\main\AndroidManifest.xml:24:17-81
+57        <activity android:name="com.masteratul.exceptionhandler.DefaultErrorScreen" >
+57-->[:react-native-exception-handler] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-exception-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-13:20
+57-->[:react-native-exception-handler] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-exception-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:19-84
+58        </activity>
+59
+60        <provider
+60-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:9-27:20
+61            android:name="androidx.core.content.FileProvider"
+61-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:13-62
+62            android:authorities="com.boilerplate.provider"
+62-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:13-60
+63            android:exported="false"
+63-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:13-37
+64            android:grantUriPermissions="true" >
+64-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:13-47
+65            <meta-data
+65-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-26:58
+66                android:name="android.support.FILE_PROVIDER_PATHS"
+66-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:17-67
+67                android:resource="@xml/provider_paths" />
+67-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:17-55
+68        </provider>
+69
+70        <activity
+70-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:9-31:72
+71            android:name="com.yalantis.ucrop.UCropActivity"
+71-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:30:13-60
+72            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+72-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:31:13-69
+73
+74        <provider
+74-->[:react-native-share] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-share\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:9-18:20
+75            android:name="cl.json.RNShareFileProvider"
+75-->[:react-native-share] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-share\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-55
+76            android:authorities="com.boilerplate.rnshare.fileprovider"
+76-->[:react-native-share] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-share\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-72
+77            android:exported="false"
+77-->[:react-native-share] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-share\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-37
+78            android:grantUriPermissions="true" >
+78-->[:react-native-share] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-share\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-47
+79            <meta-data
+79-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-26:58
+80                android:name="android.support.FILE_PROVIDER_PATHS"
+80-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:17-67
+81                android:resource="@xml/share_download_paths" />
+81-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:17-55
+82        </provider>
+83        <provider
+83-->[:react-native-webview] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-20:20
+84            android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider"
+84-->[:react-native-webview] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-83
+85            android:authorities="com.boilerplate.fileprovider"
+85-->[:react-native-webview] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-64
+86            android:exported="false"
+86-->[:react-native-webview] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-37
+87            android:grantUriPermissions="true" >
+87-->[:react-native-webview] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-47
+88            <meta-data
+88-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-26:58
+89                android:name="android.support.FILE_PROVIDER_PATHS"
+89-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:17-67
+90                android:resource="@xml/file_provider_paths" />
+90-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:17-55
+91        </provider>
+92        <provider
+92-->[:rn-fetch-blob] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\rn-fetch-blob\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:36:9-44:20
+93            android:name="com.RNFetchBlob.Utils.FileProvider"
+93-->[:rn-fetch-blob] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\rn-fetch-blob\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:37:13-62
+94            android:authorities="com.boilerplate.provider"
+94-->[:rn-fetch-blob] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\rn-fetch-blob\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:38:13-60
+95            android:exported="false"
+95-->[:rn-fetch-blob] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\rn-fetch-blob\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:39:13-37
+96            android:grantUriPermissions="true" >
+96-->[:rn-fetch-blob] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\rn-fetch-blob\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:40:13-47
+97            <meta-data
+97-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-26:58
+98                android:name="android.support.FILE_PROVIDER_PATHS"
+98-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:17-67
+99                android:resource="@xml/provider_paths" />
+99-->[:react-native-image-crop-picker] C:\Users\jahnavi sananse\Desktop\itaconnect\node_modules\react-native-image-crop-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:17-55
+100        </provider>
+101
+102        <meta-data
+102-->[com.github.bumptech.glide:okhttp3-integration:4.11.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\6046c2e7efe833b3945f37489d13ca36\jetified-okhttp3-integration-4.11.0\AndroidManifest.xml:11:9-13:43
+103            android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
+103-->[com.github.bumptech.glide:okhttp3-integration:4.11.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\6046c2e7efe833b3945f37489d13ca36\jetified-okhttp3-integration-4.11.0\AndroidManifest.xml:12:13-84
+104            android:value="GlideModule" />
+104-->[com.github.bumptech.glide:okhttp3-integration:4.11.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\6046c2e7efe833b3945f37489d13ca36\jetified-okhttp3-integration-4.11.0\AndroidManifest.xml:13:13-40
+105
+106        <receiver
+106-->[com.google.android.gms:play-services-analytics:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\f50df75a1491e52b86d79e307c322a24\jetified-play-services-analytics-17.0.0\AndroidManifest.xml:30:9-34:20
+107            android:name="com.google.android.gms.analytics.AnalyticsReceiver"
+107-->[com.google.android.gms:play-services-analytics:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\f50df75a1491e52b86d79e307c322a24\jetified-play-services-analytics-17.0.0\AndroidManifest.xml:31:13-78
+108            android:enabled="true"
+108-->[com.google.android.gms:play-services-analytics:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\f50df75a1491e52b86d79e307c322a24\jetified-play-services-analytics-17.0.0\AndroidManifest.xml:32:13-35
+109            android:exported="false" >
+109-->[com.google.android.gms:play-services-analytics:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\f50df75a1491e52b86d79e307c322a24\jetified-play-services-analytics-17.0.0\AndroidManifest.xml:33:13-37
+110        </receiver>
+111
+112        <service
+112-->[com.google.android.gms:play-services-analytics:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\f50df75a1491e52b86d79e307c322a24\jetified-play-services-analytics-17.0.0\AndroidManifest.xml:36:9-39:40
+113            android:name="com.google.android.gms.analytics.AnalyticsService"
+113-->[com.google.android.gms:play-services-analytics:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\f50df75a1491e52b86d79e307c322a24\jetified-play-services-analytics-17.0.0\AndroidManifest.xml:37:13-77
+114            android:enabled="true"
+114-->[com.google.android.gms:play-services-analytics:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\f50df75a1491e52b86d79e307c322a24\jetified-play-services-analytics-17.0.0\AndroidManifest.xml:38:13-35
+115            android:exported="false" />
+115-->[com.google.android.gms:play-services-analytics:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\f50df75a1491e52b86d79e307c322a24\jetified-play-services-analytics-17.0.0\AndroidManifest.xml:39:13-37
+116        <service
+116-->[com.google.android.gms:play-services-analytics:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\f50df75a1491e52b86d79e307c322a24\jetified-play-services-analytics-17.0.0\AndroidManifest.xml:40:9-44:72
+117            android:name="com.google.android.gms.analytics.AnalyticsJobService"
+117-->[com.google.android.gms:play-services-analytics:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\f50df75a1491e52b86d79e307c322a24\jetified-play-services-analytics-17.0.0\AndroidManifest.xml:41:13-80
+118            android:enabled="true"
+118-->[com.google.android.gms:play-services-analytics:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\f50df75a1491e52b86d79e307c322a24\jetified-play-services-analytics-17.0.0\AndroidManifest.xml:42:13-35
+119            android:exported="false"
+119-->[com.google.android.gms:play-services-analytics:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\f50df75a1491e52b86d79e307c322a24\jetified-play-services-analytics-17.0.0\AndroidManifest.xml:43:13-37
+120            android:permission="android.permission.BIND_JOB_SERVICE" />
+120-->[com.google.android.gms:play-services-analytics:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\f50df75a1491e52b86d79e307c322a24\jetified-play-services-analytics-17.0.0\AndroidManifest.xml:44:13-69
+121
+122        <activity
+122-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\ea9c34f2f0968d57b6b29868547f0686\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+123            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+123-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\ea9c34f2f0968d57b6b29868547f0686\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+124            android:exported="false"
+124-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\ea9c34f2f0968d57b6b29868547f0686\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+125            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+125-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\ea9c34f2f0968d57b6b29868547f0686\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+126
+127        <meta-data
+127-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\8e4029ecd9801f45c00bae3ad3e06b95\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+128            android:name="com.google.android.gms.version"
+128-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\8e4029ecd9801f45c00bae3ad3e06b95\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+129            android:value="@integer/google_play_services_version" />
+129-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\jahnavi sananse\.gradle\caches\transforms-2\files-2.1\8e4029ecd9801f45c00bae3ad3e06b95\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+130    </application>
+131
+132</manifest>

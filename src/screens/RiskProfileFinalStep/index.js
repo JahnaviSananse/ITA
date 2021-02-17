@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import {
   FlatList,
   Platform,
@@ -7,21 +7,24 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import Pie from 'react-native-pie';
-import Share from 'react-native-share';
-import {captureRef} from 'react-native-view-shot';
-import {connect} from 'react-redux';
-import * as ATOMS from '../../components/atoms';
-import Header from '../../components/atoms/Header/index';
-import {default as language, default as LANGUAGE} from '../../Localization';
-import {shareData} from '../../store/Auth/actions';
-import {riskProfileDetail, uploadImage} from '../../store/RiskProfile/actions';
-import * as utility from '../../Utility/util';
-import * as helpRiskData from '../RiskProfile/helpRisk.json';
-import * as chartHelper from './chartHelper.json';
-import styles from './style';
+} from "react-native";
+import FastImage from "react-native-fast-image";
+import Pie from "react-native-pie";
+import Share from "react-native-share";
+import { captureRef } from "react-native-view-shot";
+import { connect } from "react-redux";
+import * as ATOMS from "../../components/atoms";
+import Header from "../../components/atoms/Header/index";
+import { default as language, default as LANGUAGE } from "../../Localization";
+import { shareData } from "../../store/Auth/actions";
+import {
+  riskProfileDetail,
+  uploadImage,
+} from "../../store/RiskProfile/actions";
+import * as utility from "../../Utility/util";
+import * as helpRiskData from "../RiskProfile/helpRisk.json";
+import * as chartHelper from "./chartHelper.json";
+import styles from "./style";
 
 class RiskProfileFinalStep extends Component {
   constructor(props) {
@@ -30,37 +33,37 @@ class RiskProfileFinalStep extends Component {
     this.state = {
       chartList: JSON.parse(JSON.stringify(chartHelper.data)),
       helpRisJson: JSON.parse(JSON.stringify(helpRiskData.data)),
-      riskDetail: '',
-      clientName: this.props.navigation.getParam('clientName', ''),
+      riskDetail: "",
+      clientName: this.props.route.params?.clientName,
       resourceId: 0,
-      profileName: '',
+      profileName: "",
       night_mode: false,
-      current_language: 'en',
-      total: this.props.navigation.getParam('totalCount', 0),
+      current_language: "en",
+      total: this.props.route.params?.totalCount,
       chartColors: [
         {
-          borderColor: '#dadada',
+          borderColor: "#dadada",
         },
         {
-          borderColor: '#a7a7a7',
+          borderColor: "#a7a7a7",
         },
         {
-          borderColor: '#366072',
+          borderColor: "#366072",
         },
         {
-          borderColor: '#2fbac6',
+          borderColor: "#2fbac6",
         },
         {
-          borderColor: '#334850',
+          borderColor: "#334850",
         },
         {
-          borderColor: '#8cb4b7',
+          borderColor: "#8cb4b7",
         },
       ],
-      localImage: '',
-      image: '',
+      localImage: "",
+      image: "",
       uploadImage: false,
-      imgURL: '',
+      imgURL: "",
     };
   }
   sharingOptions() {
@@ -85,7 +88,7 @@ class RiskProfileFinalStep extends Component {
     }
   }
   componentWillMount() {
-    utility.recordScreen('Risk Profile Final Step Screen');
+    utility.recordScreen("Risk Profile Final Step Screen");
   }
 
   componentDidUpdate() {
@@ -96,7 +99,7 @@ class RiskProfileFinalStep extends Component {
     // }
   }
   handleBackButtonClick() {
-    this.props.navigation.navigate('Resources');
+    this.props.navigation.navigate("Resources");
     return true;
   }
   renderquestionAns() {
@@ -105,15 +108,17 @@ class RiskProfileFinalStep extends Component {
         <Text
           style={[
             styles.modalQuestionText,
-            {color: utility.changeFontColor('#253647')},
-          ]}>
+            { color: utility.changeFontColor("#253647") },
+          ]}
+        >
           {item.question}
         </Text>
         <Text
           style={[
             styles.modalText,
-            {color: utility.changeFontColor('#253647')},
-          ]}>
+            { color: utility.changeFontColor("#253647") },
+          ]}
+        >
           {item.ans}
         </Text>
       </View>
@@ -126,29 +131,32 @@ class RiskProfileFinalStep extends Component {
           <View
             style={[
               styles.chartItems,
-              {borderColor: this.state.chartColors[index].borderColor},
-            ]}></View>
+              { borderColor: this.state.chartColors[index].borderColor },
+            ]}
+          ></View>
           <Text
             style={[
               styles.chartListText,
               {
-                width: '75%',
+                width: "75%",
                 marginLeft: 10,
-                color: utility.changeFontColor('#000000'),
+                color: utility.changeFontColor("#000000"),
               },
-            ]}>
+            ]}
+          >
             {item.fund_detail.title}
           </Text>
           <Text
             style={[
               styles.chartListText,
               {
-                width: '75%',
+                width: "75%",
                 marginLeft: 10,
-                color: utility.changeFontColor('#000000'),
+                color: utility.changeFontColor("#000000"),
               },
-            ]}>
-            {item.weightage + '%'}
+            ]}
+          >
+            {item.weightage + "%"}
           </Text>
         </View>
       ));
@@ -157,7 +165,7 @@ class RiskProfileFinalStep extends Component {
 
   takeAScreenshots() {
     captureRef(this.refs.viewRef, {
-      format: 'jpg',
+      format: "jpg",
       quality: 0.8,
     }).then(
       (uri) => {
@@ -168,13 +176,13 @@ class RiskProfileFinalStep extends Component {
         setTimeout(() => {
           // this.uploadImage()
           let options = {
-            type: 'application/jpeg',
-            url: Platform.OS === 'android' ? 'file://' + uri : uri,
+            type: "application/jpeg",
+            url: Platform.OS === "android" ? "file://" + uri : uri,
           };
           Share.open(options);
         }, 200);
       },
-      (error) => console.error('Oops, snapshot failed', error),
+      (error) => console.error("Oops, snapshot failed", error)
     );
 
     // this.refs.viewShot.capture().then(uri => {
@@ -184,27 +192,28 @@ class RiskProfileFinalStep extends Component {
     //     console.log("Do something with ", uri);
     //   });
   }
-  renderItems = ({item, index}) => {
+  renderItems = ({ item, index }) => {
     return (
       <TouchableOpacity //activeOpacity={data.pdf !== '' ? 0.8 : 1.0}
         onPress={() => {
           utility.recordEvent(
-            'RiskProfileFinalStep :' + item.fund_detail.isin + ' Pressed',
+            "RiskProfileFinalStep :" + item.fund_detail.isin + " Pressed"
           );
           // if (item.fund_detail.pdf !== '') {
           //     this.props.navigation.navigate("WebViewScreen", { "title": "Fund Platform" })
           // }
 
-          if (item.fund_detail.pdf !== '') {
+          if (item.fund_detail.pdf !== "") {
             let data = JSON.parse(JSON.stringify(item.fund_detail));
             data.file_url = data.pdf;
-            this.props.navigation.navigate('WebViewScreen', {
+            this.props.navigation.navigate("WebViewScreen", {
               data: data,
               isFund: true,
             });
           }
         }}
-        style={styles.containerFundList}>
+        style={styles.containerFundList}
+      >
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>{item.fund_detail.isin}</Text>
           <Text style={styles.currencyText}>{item.fund_detail.fund_code}</Text>
@@ -213,7 +222,7 @@ class RiskProfileFinalStep extends Component {
         <View style={styles.imageContainer}>
           <FastImage
             style={styles.imageStyle}
-            source={{uri: item.fund_detail.image}}
+            source={{ uri: item.fund_detail.image }}
           />
           <Text style={styles.descText} numberOfLines={1}>
             {item.fund_detail.title}
@@ -227,10 +236,10 @@ class RiskProfileFinalStep extends Component {
           <View style={styles.verticalLineContainer} />
           <Text style={styles.categoryText}>{item.fund_detail.assetclass}</Text>
         </View>
-        {item.fund_detail.pdf !== '' && (
+        {item.fund_detail.pdf !== "" && (
           <FastImage
             style={styles.cornerImage}
-            source={require('../../resources/corner.png')}
+            source={require("../../resources/corner.png")}
           />
         )}
       </TouchableOpacity>
@@ -247,17 +256,36 @@ class RiskProfileFinalStep extends Component {
   // }
   render() {
     //
-    let profileName = '';
-    let profile_description = '';
+    // let profileName = "";
+    // let profile_description = "";
+    // let fundsData = [];
+    // let pieChartdata = [];
+    // let pierChartColors = [];
+    // if (this.props.riskDetail != null) {
+    //   (profileName = this.props.riskDetail[0].profile_name),
+    //     (profile_description = this.props.riskDetail[0].profile_description),
+    //     (fundsData = this.props.riskDetail[0].funds);
+    //   fundsData.map((item) => {
+    //     pieChartdata.push(item.weightage);
+    //   });
+    //   this.state.chartColors.map((value) => {
+    //     //item.color = value.borderColor
+    //     pierChartColors.push(value.borderColor);
+    //   });
+
+    let profileName = "";
+    let profile_description = "";
     let fundsData = [];
     let pieChartdata = [];
     let pierChartColors = [];
     if (this.props.riskDetail != null) {
-      (profileName = this.props.riskDetail[0].profile_name),
-        (profile_description = this.props.riskDetail[0].profile_description),
-        (fundsData = this.props.riskDetail[0].funds);
-      fundsData.map((item) => {
-        pieChartdata.push(item.weightage);
+      profileName = this.props.riskDetail[0].profile_name;
+      fundsData = this.props.riskDetail[0].funds;
+      fundsData.map((item, index) => {
+        pieChartdata.push({
+          percentage: item.weightage,
+          color: this.state.chartColors[index].borderColor,
+        });
       });
       this.state.chartColors.map((value) => {
         //item.color = value.borderColor
@@ -265,27 +293,29 @@ class RiskProfileFinalStep extends Component {
       });
     }
     var OriginalText = language.RiskProfileResult;
-    let ReplacedText = OriginalText.replace('XXXXXX', profileName);
-    ReplacedText = ReplacedText.replace('XXXXXX', profileName);
+    let ReplacedText = OriginalText.replace("XXXXXX", profileName);
+    ReplacedText = ReplacedText.replace("XXXXXX", profileName);
     return (
       !this.props.loading && (
         <SafeAreaView
           style={{
             flex: 1,
-            backgroundColor: utility.changeHeaderColor('#FFFFFF'),
-          }}>
+            backgroundColor: utility.changeHeaderColor("#FFFFFF"),
+          }}
+        >
           <View
             style={[
               styles.container,
-              {backgroundColor: utility.changeHeaderColor('#f3f3f3f3')},
-            ]}>
+              { backgroundColor: utility.changeHeaderColor("#f3f3f3f3") },
+            ]}
+          >
             <Header
               title={LANGUAGE.RiskProfile}
               leftImage={utility.changeCloseButton()}
               rightImage={utility.changeUploadButton()}
-              backgroundColor={utility.changeHeaderColor('#ffffff')}
+              backgroundColor={utility.changeHeaderColor("#ffffff")}
               redirectLeft={() =>
-                this.props.navigation.navigate('MainTabbarScreen')
+                this.props.navigation.navigate("MainTabbarScreen")
               }
               redirectRight={() => this.sharingOptions()}
               // onRightImagePress={this.setModalVisible}
@@ -294,39 +324,44 @@ class RiskProfileFinalStep extends Component {
             <ScrollView
               style={[
                 styles.viewContainer,
-                {backgroundColor: utility.changeBackgroundColor('#f3f3f3')},
-              ]}>
+                { backgroundColor: utility.changeBackgroundColor("#f3f3f3") },
+              ]}
+            >
               <View
                 ref="viewRef"
                 collapsable={false}
                 style={[
                   styles.viewScrennShot,
-                  {backgroundColor: utility.changeBackgroundColor('#f3f3f3')},
-                ]}>
+                  { backgroundColor: utility.changeBackgroundColor("#f3f3f3") },
+                ]}
+              >
                 <Text
                   style={[
                     styles.text,
                     {
                       marginTop: 15,
-                      color: utility.changeFontColor('#8bb2b5'),
+                      color: utility.changeFontColor("#8bb2b5"),
                     },
-                  ]}>
+                  ]}
+                >
                   {this.state.clientName}
                 </Text>
 
                 <Text
                   style={[
                     styles.text,
-                    {color: utility.changeFontColor('#000000')},
-                  ]}>
+                    { color: utility.changeFontColor("#000000") },
+                  ]}
+                >
                   {language.YourRiskToleranceProfile}
                 </Text>
 
                 <Text
                   style={[
                     styles.moderateText,
-                    {color: utility.changeFontColor('#8bb2b5')},
-                  ]}>
+                    { color: utility.changeFontColor("#8bb2b5") },
+                  ]}
+                >
                   {profileName}
                 </Text>
 
@@ -336,39 +371,35 @@ class RiskProfileFinalStep extends Component {
                     {
                       borderBottomColor:
                         this.props.userData.night_mode === 1
-                          ? '#8bb2b5'
-                          : '#000',
+                          ? "#8bb2b5"
+                          : "#000",
                     },
                   ]}
                 />
-                <View style={{height: 20}} />
+                <View style={{ height: 20 }} />
                 <Text
                   style={[
                     styles.normalText,
-                    {color: utility.changeFontColor('#253647')},
-                  ]}>
+                    { color: utility.changeFontColor("#253647") },
+                  ]}
+                >
                   {profile_description}
                   {/* based on your answers, you have a {profileName} risk tolerance investment profile. Below you can see a sample investment portfolio in USD following a {profileName.toLowerCase()} strategy. */}
                 </Text>
 
                 <View style={styles.chartView}>
                   {/* <Image source={images.CHART} style={styles.chartImg} /> */}
-                  <Pie
-                    radius={100}
-                    innerRadius={60}
-                    series={pieChartdata}
-                    colors={pierChartColors}
-                  />
+                  <Pie radius={100} innerRadius={60} sections={pieChartdata} />
                 </View>
-                <View style={{flexDirection: 'column'}}>
+                <View style={{ flexDirection: "column" }}>
                   {this.renderText()}
-                  <View style={{marginTop: 20, flex: 1}}>
+                  <View style={{ marginTop: 20, flex: 1 }}>
                     {/* <FundList data={fundsData}
                                         navigation={this.props.navigation} /> */}
                     <FlatList data={fundsData} renderItem={this.renderItems} />
                   </View>
                   {/* {this.renderquestionAns()} */}
-                  <View style={{height: 20}}></View>
+                  <View style={{ height: 20 }}></View>
                 </View>
               </View>
             </ScrollView>
@@ -395,8 +426,8 @@ class RiskProfileFinalStep extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  const {loading, riskProfileDetail, resourceId} = state.riskProfile;
-  const {userId, userData, current_language} = state.user;
+  const { loading, riskProfileDetail, resourceId } = state.riskProfile;
+  const { userId, userData, current_language } = state.user;
   return {
     loadingShare: state.auth.loadingShare,
     current_language,

@@ -1,92 +1,43 @@
 import {
   CATEGORY_DATA_FAILURE,
-
-  CATEGORY_DATA_REQUEST, CATEGORY_DATA_SUCCESS,
-
-
-
-  CHECK_VERSION_FAILURE, CHECK_VERSION_REQUEST,
-  CHECK_VERSION_SUCCESS, CODE_FAILURE, CODE_REQUEST,
-  CODE_SUCCESS, FORGET_FAILURE, FORGET_REQUEST,
+  CATEGORY_DATA_REQUEST,
+  CATEGORY_DATA_SUCCESS,
+  CHECK_VERSION_FAILURE,
+  CHECK_VERSION_REQUEST,
+  CHECK_VERSION_SUCCESS,
+  CODE_FAILURE,
+  CODE_REQUEST,
+  CODE_SUCCESS,
+  FORGET_FAILURE,
+  FORGET_REQUEST,
   FORGET_SUCCESS,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  INTERNET_STATE, LOGIN_FAILURE, LOGIN_REQUEST,
+  INTERNET_STATE,
+  LOGIN_FAILURE,
+  LOGIN_REQUEST,
   LOGIN_SUCCESS,
-
-
-
-
-
-
-  LOGOUT_FAILURE, LOGOUT_REQUEST,
+  LOGOUT_FAILURE,
+  LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-
-
-
-
-
-
-
-
-
-
-
-
-  RESET_FAILURE, RESET_REQUEST,
+  RESET_FAILURE,
+  RESET_REQUEST,
   RESET_SUCCESS,
-
-
-
-
-
-
-
-
-
   SHAREING_FAILURE,
-
-  SHAREING_OPEN, SHAREING_REQUEST,
-  SHAREING_SUCCESS, SIGNUP_FAILURE,
-
-
-
-
-
-  SIGNUP_FAILURE_INTORDUCER, SIGNUP_REQUEST,
-
-
-
-
-
-  SIGNUP_REQUEST_INTORDUCER, SIGNUP_SUCCESS,
-
-
-
-
-
-  SIGNUP_SUCCESS_INTORDUCER
-} from './actionTypes';
+  SHAREING_OPEN,
+  SHAREING_REQUEST,
+  SHAREING_SUCCESS,
+  SIGNUP_FAILURE,
+  SIGNUP_FAILURE_INTORDUCER,
+  SIGNUP_REQUEST,
+  SIGNUP_REQUEST_INTORDUCER,
+  SIGNUP_SUCCESS,
+  SIGNUP_SUCCESS_INTORDUCER,
+} from "./actionTypes";
 
 const intialState = {
   loading: false,
   userId: null,
-  email_address: '',
-  authToken: '',
+  email_address: "",
+  authToken: "",
   userData: {},
   signupData: {},
   passwordData: {},
@@ -99,11 +50,11 @@ const intialState = {
   checkVersion: {
     loading: false,
     success: false,
-    data: {}
+    data: {},
   },
   loadingShare: false,
   isConnected: true,
-}
+};
 
 export default (state = intialState, action) => {
   switch (action.type) {
@@ -144,7 +95,7 @@ export default (state = intialState, action) => {
         isSuccess: true,
         isLogin: true,
         userData: action.payload,
-        userId: action.payload.user_id
+        userId: action.payload.user_id,
       };
     case LOGIN_FAILURE:
       return {
@@ -162,7 +113,7 @@ export default (state = intialState, action) => {
         ...state,
         loading: false,
         isSuccess: true,
-        passwordData: action.payload
+        passwordData: action.payload,
       };
     case SIGNUP_FAILURE:
       return {
@@ -181,7 +132,7 @@ export default (state = intialState, action) => {
         loading: false,
         isSuccess: true,
         signupData: action.payload,
-        userId: action.payload.user_id
+        userId: action.payload.user_id,
       };
     case SIGNUP_FAILURE_INTORDUCER:
       return {
@@ -199,9 +150,11 @@ export default (state = intialState, action) => {
         ...state,
         loading: false,
         isSuccess: true,
-        email_address: action.payload.email_address ? action.payload.email_address : '',
+        email_address: action.payload.email_address
+          ? action.payload.email_address
+          : "",
         introducerCode: action.payload,
-        userId: action.payload.user_id
+        userId: action.payload.user_id,
       };
     case FORGET_FAILURE:
       return {
@@ -219,7 +172,7 @@ export default (state = intialState, action) => {
         ...state,
         loading: false,
         isSuccess: true,
-        code: action.payload
+        code: action.payload,
       };
     case CODE_FAILURE:
       return {
@@ -237,7 +190,7 @@ export default (state = intialState, action) => {
         ...state,
         loading: false,
         isSuccess: true,
-        newPassword: action.payload
+        newPassword: action.payload,
       };
     case RESET_FAILURE:
       return {
@@ -255,7 +208,6 @@ export default (state = intialState, action) => {
         ...state,
         loading: false,
         isSuccess: true,
-
       };
     case LOGOUT_FAILURE:
       return {
@@ -267,7 +219,7 @@ export default (state = intialState, action) => {
       return {
         ...state,
         loading: true,
-        configData: {}
+        configData: {},
       };
 
     case CATEGORY_DATA_SUCCESS:
@@ -275,14 +227,14 @@ export default (state = intialState, action) => {
         ...state,
         loading: false,
         isSuccess: true,
-        configData: action.payload
+        configData: action.payload,
       };
     case CATEGORY_DATA_FAILURE:
       return {
         ...state,
         loading: false,
         isSuccess: false,
-        configData: {}
+        configData: {},
       };
 
     case CHECK_VERSION_REQUEST:
@@ -292,8 +244,8 @@ export default (state = intialState, action) => {
           ...state.checkVersion,
           loading: true,
           success: false,
-          data: {}
-        }
+          data: {},
+        },
       };
 
     case CHECK_VERSION_SUCCESS:
@@ -303,9 +255,9 @@ export default (state = intialState, action) => {
           ...state.checkVersion,
           loading: false,
           success: true,
-          data: action.payload
+          data: action.payload,
           // data: {}
-        }
+        },
       };
     case CHECK_VERSION_FAILURE:
       return {
@@ -314,10 +266,10 @@ export default (state = intialState, action) => {
           ...state.checkVersion,
           loading: false,
           success: true,
-          data: {}
-        }
+          data: {},
+        },
       };
     default:
-      return state
+      return state;
   }
-}
+};

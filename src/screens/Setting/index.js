@@ -1,28 +1,28 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
+import AsyncStorage from "@react-native-community/async-storage";
 import {
   Alert,
-  AsyncStorage,
   SafeAreaView,
   SectionList,
   Switch,
   Text,
   TouchableOpacity,
   View,
-} from 'react-native';
-import DeviceInfo from 'react-native-device-info';
-import FastImage from 'react-native-fast-image';
-import {connect} from 'react-redux';
-import * as ATOMS from '../../components/atoms';
-import Header from '../../components/atoms/Header/index';
-import * as CONSTANT from '../../constants/constant';
-import language from '../../Localization';
+} from "react-native";
+import DeviceInfo from "react-native-device-info";
+import FastImage from "react-native-fast-image";
+import { connect } from "react-redux";
+import * as ATOMS from "../../components/atoms";
+import Header from "../../components/atoms/Header/index";
+import * as CONSTANT from "../../constants/constant";
+import language from "../../Localization";
 import {
   changeNightMode,
   logout,
   updateNightMode,
-} from '../../store/User/actions';
-import * as utility from '../../Utility/util';
-import styles from './style';
+} from "../../store/User/actions";
+import * as utility from "../../Utility/util";
+import styles from "./style";
 
 class Setting extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class Setting extends Component {
     this.state = {
       switchValue: false,
       night_mode: false,
-      current_language: 'en',
+      current_language: "en",
     };
 
     setTimeout(() => {
@@ -44,8 +44,8 @@ class Setting extends Component {
     });
   }
   toggleSwitch = (value) => {
-    utility.recordEvent('Setting : NightMode switch toggle');
-    this.setState({switchValue: value});
+    utility.recordEvent("Setting : NightMode switch toggle");
+    this.setState({ switchValue: value });
     if (this.props.userId) {
       let nightMode = {};
       nightMode.nightmode_status = value ? 1 : 0;
@@ -58,7 +58,7 @@ class Setting extends Component {
   };
 
   componentWillMount() {
-    utility.recordScreen('Setting Screen');
+    utility.recordScreen("Setting Screen");
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -73,7 +73,7 @@ class Setting extends Component {
   }
   renderSignupAlert() {
     Alert.alert(
-      '',
+      "",
       language.RememberAccountSettings,
       [
         {
@@ -91,33 +91,35 @@ class Setting extends Component {
         {
           text: language.Cancel,
           onPress: () => {},
-          style: 'cancel',
+          style: "cancel",
         },
       ],
-      {cancelable: false},
+      { cancelable: false }
     );
   }
   renderMainSignOutAlert(isKeep) {
-    AsyncStorage.getItem('userLogin').then((userLogin) => {
+    AsyncStorage.getItem("userLogin").then((userLogin) => {
+      console.log("user login......", userLogin);
       if (userLogin) {
         let dataUser = JSON.parse(userLogin);
-        AsyncStorage.getItem('biometryType').then((biometryType) => {
+        AsyncStorage.getItem("biometryType").then((biometryType) => {
           if (biometryType !== 0) {
-            AsyncStorage.setItem('loginBio', JSON.stringify(dataUser));
+            AsyncStorage.setItem("loginBio", JSON.stringify(dataUser));
           } else {
-            AsyncStorage.removeItem('loginBio');
+            AsyncStorage.removeItem("loginBio");
           }
 
           let request = {};
           request.isKeep = isKeep;
           request.device_token = this.props.authToken;
-          this.props.logout(request);
+          console.log("NAV........", this.props);
+          this.props.logout(request, this.props.navigation);
         });
       } else {
         let request = {};
         request.isKeep = isKeep;
         request.device_token = this.props.authToken;
-        this.props.logout(request);
+        this.props.logout(request, this.props.navigation);
       }
     });
   }
@@ -125,50 +127,50 @@ class Setting extends Component {
   _renderRedirect = (value) => {
     switch (value) {
       case CONSTANT.LANGUAGE:
-        utility.recordEvent('Settings : Language Option Pressed');
-        this.props.navigation.push('Language');
+        utility.recordEvent("Settings : Language Option Pressed");
+        this.props.navigation.push("Language");
         break;
       case CONSTANT.SECURITY:
-        utility.recordEvent('Settings : Security Option Pressed');
-        this.props.navigation.push('Security');
+        utility.recordEvent("Settings : Security Option Pressed");
+        this.props.navigation.push("Security");
         break;
       case CONSTANT.NOTIFICATION:
-        utility.recordEvent('Settings : Notification Option Pressed');
-        this.props.navigation.push('Notification');
+        utility.recordEvent("Settings : Notification Option Pressed");
+        this.props.navigation.push("Notification");
         break;
       case CONSTANT.REPORT_ISSUE:
-        utility.recordEvent('Settings : ReportAnIssue Option Pressed');
-        this.props.navigation.push('ReportAnIssue');
+        utility.recordEvent("Settings : ReportAnIssue Option Pressed");
+        this.props.navigation.push("ReportAnIssue");
         break;
       case CONSTANT.FAQ:
-        utility.recordEvent('Settings : FAQ Option Pressed');
+        utility.recordEvent("Settings : FAQ Option Pressed");
         //this.props.navigation.navigate("WebViewScreen", { "title": language.FAQ })
         break;
       case CONSTANT.PRIVACY:
         let data = {};
-        data.title = '';
+        data.title = "";
         data.file_url = this.props.configData.privacy_policy;
-        this.props.navigation.navigate('WebViewScreen', {data});
+        this.props.navigation.navigate("WebViewScreen", { data });
 
         // utility.recordEvent("Settings : Privacy Option Pressed")
         // this.props.navigation.push("Privacy")
         break;
       case CONSTANT.GETTING_STARTED:
-        utility.recordEvent('Settings : GettingStarted Option Pressed');
-        this.props.navigation.navigate('GettingStarted', {
-          screen: 'setting',
-          isLogin: '0',
+        utility.recordEvent("Settings : GettingStarted Option Pressed");
+        this.props.navigation.navigate("GettingStarted", {
+          screen: "setting",
+          isLogin: "0",
         });
         break;
       case CONSTANT.SIGNOUT:
-        utility.recordEvent('Settings : Signout Option Pressed');
+        utility.recordEvent("Settings : Signout Option Pressed");
         this.renderSignupAlert();
         // this.props.logout()
         break;
     }
   };
   getBGColor(color) {
-    const {userData} = this.props;
+    const { userData } = this.props;
     let isNightMode = userData.night_mode === 0 ? false : true;
     return utility.changeBackgroundColorNew(color, isNightMode);
   }
@@ -178,32 +180,32 @@ class Setting extends Component {
 
     let img_lan =
       this.props.userData.night_mode === 1
-        ? require('../../resources/language_w.png')
-        : require('../../resources/language.png');
+        ? require("../../resources/language_w.png")
+        : require("../../resources/language.png");
     let img_sec =
       this.props.userData.night_mode === 1
-        ? require('../../resources/security_w.png')
-        : require('../../resources/security.png');
+        ? require("../../resources/security_w.png")
+        : require("../../resources/security.png");
     let img_noti =
       this.props.userData.night_mode === 1
-        ? require('../../resources/Notification_w.png')
-        : require('../../resources/Notification.png');
+        ? require("../../resources/Notification_w.png")
+        : require("../../resources/Notification.png");
     let img_night =
       this.props.userData.night_mode === 1
-        ? require('../../resources/nightMode_w.png')
-        : require('../../resources/nightMode.png');
+        ? require("../../resources/nightMode_w.png")
+        : require("../../resources/nightMode.png");
     let img_report =
       this.props.userData.night_mode === 1
-        ? require('../../resources/report_w.png')
-        : require('../../resources/report.png');
+        ? require("../../resources/report_w.png")
+        : require("../../resources/report.png");
     let img_privacy =
       this.props.userData.night_mode === 1
-        ? require('../../resources/privacy_w.png')
-        : require('../../resources/privacy.png');
+        ? require("../../resources/privacy_w.png")
+        : require("../../resources/privacy.png");
     let img_gettingstarted =
       this.props.userData.night_mode === 1
-        ? require('../../resources/gettingStarted_w.png')
-        : require('../../resources/gettingStarted.png');
+        ? require("../../resources/gettingStarted_w.png")
+        : require("../../resources/gettingStarted.png");
     if (this.props.userId) {
       sectionOne = [
         {
@@ -245,7 +247,7 @@ class Setting extends Component {
           category: CONSTANT.GETTING_STARTED,
           text: language.Getting_started,
         },
-        {icon: '', category: CONSTANT.SIGNOUT},
+        { icon: "", category: CONSTANT.SIGNOUT },
       ];
     } else {
       sectionOne = [
@@ -279,22 +281,24 @@ class Setting extends Component {
       <SafeAreaView
         style={{
           flex: 1,
-          backgroundColor: utility.changeHeaderColor('#F3F3F3'),
-        }}>
+          backgroundColor: utility.changeHeaderColor("#F3F3F3"),
+        }}
+      >
         <View style={styles.container}>
           <Header
             title={language.Settings}
             leftImage={utility.changeCloseButton()}
-            backgroundColor={utility.changeHeaderColor('#F3F3F3')}
+            backgroundColor={utility.changeHeaderColor("#F3F3F3")}
             redirectLeft={() => {
-              this.props.navigation.goBack();
+              console.log("this.props=======>>>>", this.props);
+              this.props.navigation.replace("MainTabbarScreen");
             }}
           />
           <SectionList
-            contentContainerStyle={{paddingBottom: 100}}
+            contentContainerStyle={{ paddingBottom: 100 }}
             style={{
-              height: '100%',
-              backgroundColor: this.getBGColor('#FFFFFF'),
+              height: "100%",
+              backgroundColor: this.getBGColor("#FFFFFF"),
             }}
             sections={[
               {
@@ -306,24 +310,26 @@ class Setting extends Component {
                 data: sectionTwo,
               },
             ]}
-            renderSectionHeader={({section}) => (
+            renderSectionHeader={({ section }) => (
               <Text
                 style={[
                   styles.SectionHeader,
                   {
-                    color: utility.changeFontColor('#696969'),
-                    backgroundColor: this.getBGColor('#FFFFFF'),
+                    color: utility.changeFontColor("#696969"),
+                    backgroundColor: this.getBGColor("#FFFFFF"),
                   },
-                ]}>
-                {' '}
-                {section.title}{' '}
+                ]}
+              >
+                {" "}
+                {section.title}{" "}
               </Text>
             )}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() => this._renderRedirect(item.category)}
                 disabled={item.category === CONSTANT.NIGHT_MODE ? true : false}
-                style={{flexDirection: 'row', marginTop: 10}}>
+                style={{ flexDirection: "row", marginTop: 10 }}
+              >
                 {item.category != CONSTANT.SIGNOUT && (
                   <FastImage
                     style={styles.iconStyle}
@@ -338,11 +344,12 @@ class Setting extends Component {
                     {
                       color:
                         item.category != CONSTANT.SIGNOUT
-                          ? utility.changeFontColor('#696969')
-                          : '#89B4B6',
+                          ? utility.changeFontColor("#696969")
+                          : "#89B4B6",
                       marginLeft: item.category != CONSTANT.SIGNOUT ? 0 : 5,
                     },
-                  ]}>
+                  ]}
+                >
                   {item.category != CONSTANT.SIGNOUT
                     ? item.text
                     : language.SignOut}
@@ -371,22 +378,23 @@ class Setting extends Component {
           <ATOMS.Loader isLoading={this.props.loading} />
           <Text
             style={{
-              position: 'absolute',
+              position: "absolute",
               bottom: 30,
-              alignSelf: 'center',
-              color: 'gray',
-            }}>
+              alignSelf: "center",
+              color: "gray",
+            }}
+          >
             {language.Version} {DeviceInfo.getVersion()}
           </Text>
         </View>
-        <ATOMS.OfflineBar />
+        {/* <ATOMS.OfflineBar /> */}
       </SafeAreaView>
     );
   }
 }
 const mapStateToProps = (state) => {
-  const {loading, userData, current_language, userId, authToken} = state.user;
-  const {configData} = state.auth;
+  const { loading, userData, current_language, userId, authToken } = state.user;
+  const { configData } = state.auth;
   return {
     configData,
     userId,

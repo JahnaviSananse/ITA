@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
+import AsyncStorage from "@react-native-community/async-storage";
 import {
   ActivityIndicator,
   AppState,
-  AsyncStorage,
   Dimensions,
   Linking,
   Platform,
@@ -11,25 +11,25 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import RNPrint from 'react-native-print';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import {WebView} from 'react-native-webview';
-import {connect} from 'react-redux';
-import * as ATOMS from '../../components/atoms';
-import Header from '../../components/atoms/Header/index';
-import language from '../../Localization';
-import * as images from '../../resources/index';
-import {clearShareData, shareData} from '../../store/Auth/actions';
+} from "react-native";
+import FastImage from "react-native-fast-image";
+import RNPrint from "react-native-print";
+import RBSheet from "react-native-raw-bottom-sheet";
+import { WebView } from "react-native-webview";
+import { connect } from "react-redux";
+import * as ATOMS from "../../components/atoms";
+import Header from "../../components/atoms/Header/index";
+import language from "../../Localization";
+import * as images from "../../resources/index";
+import { clearShareData, shareData } from "../../store/Auth/actions";
 import {
   addRemoveFavorite,
   clearData,
   getFavoriteList,
-} from '../../store/Library/actions';
-import * as utility from '../../Utility/util';
-import Loaderview from './Loaderview';
-import styles from './style';
+} from "../../store/Library/actions";
+import * as utility from "../../Utility/util";
+import Loaderview from "./Loaderview";
+import styles from "./style";
 
 class WebViewScreen extends Component {
   constructor(props) {
@@ -42,16 +42,16 @@ class WebViewScreen extends Component {
       isFav: false,
       isloader: false,
       night_mode: false,
-      current_language: 'en',
+      current_language: "en",
       selectedPrinter: null,
       update: false,
       //showBookMark: false
     };
-    AsyncStorage.setItem('isLibraryItem', '1');
+    AsyncStorage.setItem("isLibraryItem", "1");
     setTimeout(() => {
       this.props.getFavoriteList();
     }, 100);
-    console.log('constructer');
+    console.log("constructer");
 
     setTimeout(() => {
       this.setState({
@@ -60,30 +60,30 @@ class WebViewScreen extends Component {
     }, 500);
   }
   hideSpinner() {
-    this.setState({visible: false});
+    this.setState({ visible: false });
   }
   _handleAppStateChange = (nextAppState) => {
     if (
       this.state.appState.match(/inactive|background/) &&
-      nextAppState === 'active'
+      nextAppState === "active"
     ) {
-      console.log('App has come to the foreground!');
+      console.log("App has come to the foreground!");
     }
-    this.setState({appState: nextAppState});
+    this.setState({ appState: nextAppState });
   };
 
   componentWillMount() {
     this.setState({
-      data: this.props.navigation.getParam('data'),
+      data: this.props.route.params?.data,
     });
-    console.log('willmount');
+    console.log("willmount");
     this.props.clearShareData();
-    utility.recordScreen('Search in ' + this.getTitle());
+    utility.recordScreen("Search in " + this.getTitle());
   }
   componentDidMount() {
-    console.log('didmount');
+    console.log("didmount");
     let showBookMark = false;
-    AsyncStorage.getItem('isDiscover').then((isDiscover) => {
+    AsyncStorage.getItem("isDiscover").then((isDiscover) => {
       if (isDiscover) {
         showBookMark = true;
         //alert(showBookMark)
@@ -93,7 +93,7 @@ class WebViewScreen extends Component {
     });
   }
   componentWillUnmount() {
-    AsyncStorage.removeItem('isLibraryItem');
+    AsyncStorage.removeItem("isLibraryItem");
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.userData !== this.props.userData && this.props.userData) {
@@ -106,19 +106,19 @@ class WebViewScreen extends Component {
     }
   }
   sharingOptions() {
-    let newUrl = this.state.data.file_url.replace(' ', '');
-    console.log('coming....', newUrl);
+    let newUrl = this.state.data.file_url.replace(" ", "");
+    console.log("coming....", newUrl);
     this.props.shareData(newUrl);
   }
 
   loadInBrowser = () => {
-    let newUrl = this.state.data.file_url.replace(' ', '');
+    let newUrl = this.state.data.file_url.replace(" ", "");
     Linking.openURL(newUrl).catch((err) =>
-      console.error("Couldn't load page", err),
+      console.error("Couldn't load page", err)
     );
   };
   shareLink() {
-    utility.recordEvent('WebViewScreen : share web url');
+    utility.recordEvent("WebViewScreen : share web url");
     Share.share({
       message: this.state.data.file_url,
       url: this.state.data.file_url, //add link here to share
@@ -126,11 +126,11 @@ class WebViewScreen extends Component {
     });
   }
   async printRemotePDF() {
-    await RNPrint.print({filePath: this.state.data.file_url});
+    await RNPrint.print({ filePath: this.state.data.file_url });
   }
   selectPrinter = async () => {
-    const selectedPrinter = await RNPrint.selectPrinter({x: 100, y: 100});
-    this.setState({selectedPrinter});
+    const selectedPrinter = await RNPrint.selectPrinter({ x: 100, y: 100 });
+    this.setState({ selectedPrinter });
   };
   renderBottomSheet() {
     let isFav = false;
@@ -142,7 +142,7 @@ class WebViewScreen extends Component {
         }
       });
     }
-    let isFund = this.props.navigation.getParam('isFund');
+    let isFund = this.props.route.params?.isFund;
     return (
       <View>
         <RBSheet
@@ -153,10 +153,11 @@ class WebViewScreen extends Component {
           duration={250}
           customStyles={{
             container: {
-              justifyContent: 'center',
-              alignItems: 'center',
+              justifyContent: "center",
+              alignItems: "center",
             },
-          }}>
+          }}
+        >
           <TouchableOpacity
             style={styles.rowContainer}
             onPress={() => {
@@ -165,16 +166,18 @@ class WebViewScreen extends Component {
                 this.loadInBrowser();
                 // this.sharingOptions()
               }, 1000);
-            }}>
-            <View style={{flexDirection: 'row'}}>
+            }}
+          >
+            <View style={{ flexDirection: "row" }}>
               <FastImage
                 resizeMode={FastImage.resizeMode.contain}
                 style={styles.icon}
-                source={images.SHARE}></FastImage>
+                source={images.SHARE}
+              ></FastImage>
             </View>
             <View style={styles.textContainer}>
-              <Text style={{textAlignVertical: 'center'}}>
-                {Platform.OS === 'ios' ? language.BrowserIOS : language.Browser}
+              <Text style={{ textAlignVertical: "center" }}>
+                {Platform.OS === "ios" ? language.BrowserIOS : language.Browser}
               </Text>
             </View>
             <View style={styles.saperator} />
@@ -186,15 +189,17 @@ class WebViewScreen extends Component {
               setTimeout(() => {
                 this.sharingOptions();
               }, 1000);
-            }}>
-            <View style={{flexDirection: 'row'}}>
+            }}
+          >
+            <View style={{ flexDirection: "row" }}>
               <FastImage
                 resizeMode={FastImage.resizeMode.contain}
                 style={styles.icon}
-                source={images.SHARE}></FastImage>
+                source={images.SHARE}
+              ></FastImage>
             </View>
             <View style={styles.textContainer}>
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: "center" }}>
                 {language.Share}
               </Text>
             </View>
@@ -204,8 +209,9 @@ class WebViewScreen extends Component {
           {isFund !== true ? (
             <TouchableOpacity
               style={styles.rowContainer}
-              onPress={() => this.fncBookmarkPost(this.state.data.post_id)}>
-              <View style={{flexDirection: 'row'}}>
+              onPress={() => this.fncBookmarkPost(this.state.data.post_id)}
+            >
+              <View style={{ flexDirection: "row" }}>
                 <FastImage
                   resizeMode={FastImage.resizeMode.contain}
                   style={styles.icon}
@@ -213,10 +219,11 @@ class WebViewScreen extends Component {
                     isFav === true
                       ? images.BOOKMARK_SELECTED
                       : images.BOOKMARK_UNSELECTED
-                  }></FastImage>
+                  }
+                ></FastImage>
               </View>
               <View style={styles.textContainer}>
-                <Text style={{textAlignVertical: 'center'}}>
+                <Text style={{ textAlignVertical: "center" }}>
                   {isFav === true ? language.Bookmarked : language.Bookmark}
                 </Text>
               </View>
@@ -231,15 +238,17 @@ class WebViewScreen extends Component {
               setTimeout(() => {
                 this.printRemotePDF();
               }, 500);
-            }}>
-            <View style={{flexDirection: 'row'}}>
+            }}
+          >
+            <View style={{ flexDirection: "row" }}>
               <FastImage
                 resizeMode={FastImage.resizeMode.contain}
                 style={styles.icon}
-                source={images.PRINTER}></FastImage>
+                source={images.PRINTER}
+              ></FastImage>
             </View>
             <View style={styles.textContainer}>
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: "center" }}>
                 {language.Print}
               </Text>
             </View>
@@ -248,7 +257,8 @@ class WebViewScreen extends Component {
 
           <TouchableOpacity
             style={styles.cancelButton}
-            onPress={() => this.RBSheet.close()}>
+            onPress={() => this.RBSheet.close()}
+          >
             <Text>{language.Cancel}</Text>
           </TouchableOpacity>
         </RBSheet>
@@ -256,13 +266,13 @@ class WebViewScreen extends Component {
     );
   }
   fncBookmarkPost(postID) {
-    utility.recordEvent('WebViewScreen: fncBookmarkPost');
+    utility.recordEvent("WebViewScreen: fncBookmarkPost");
     let bookmarkRequest = {};
     bookmarkRequest.post_id = postID;
     this.props.addRemoveFavorite(bookmarkRequest);
   }
   getTitle() {
-    let title = '';
+    let title = "";
     let daata = this.state.data;
     if (daata !== undefined) {
       if (daata.title !== undefined) {
@@ -272,23 +282,23 @@ class WebViewScreen extends Component {
     return title;
   }
   render() {
-    this.props.navigation.addListener('didFocus', (payload) => {
-      console.log('Payload is called .....................');
+    this.props.navigation.addListener("didFocus", (payload) => {
+      console.log("Payload is called .....................");
     });
-    let height = Dimensions.get('screen').height - 50;
-    let width = Dimensions.get('screen').width;
+    let height = Dimensions.get("screen").height - 50;
+    let width = Dimensions.get("screen").width;
     let isDisable = true;
     let title = this.getTitle();
     let url = this.state.data.file_url;
     let isShowRight = true;
-    if (url.indexOf('&') > -1 && Platform.OS === 'android') {
+    if (url.indexOf("&") > -1 && Platform.OS === "android") {
       url = encodeURIComponent(this.state.data.file_url);
     }
     let uri = url;
-    if (url.indexOf('.pdf') > -1 && Platform.OS === 'android') {
+    if (url.indexOf(".pdf") > -1 && Platform.OS === "android") {
       isShowRight = true;
       uri = `https://drive.google.com/viewerng/viewer?embedded=true&url=${url}`;
-    } else if (url.indexOf('.pdf') > -1 && Platform.OS === 'ios') {
+    } else if (url.indexOf(".pdf") > -1 && Platform.OS === "ios") {
       isShowRight = true;
       uri = url;
     } else {
@@ -310,28 +320,33 @@ class WebViewScreen extends Component {
     // }
     return (
       <SafeAreaView
-        style={{backgroundColor: utility.changeHeaderColor('#F3F3F3')}}>
-        <View style={{height: '100%', width: '100%'}}>
+        style={{ backgroundColor: utility.changeHeaderColor("#F3F3F3") }}
+      >
+        <View style={{ height: "100%", width: "100%" }}>
           {/* {Platform.OS === 'ios' && this.customOptions()} */}
 
           <WebView
             ref={(webView) => (this.webView = webView)}
             onLoad={() => this.hideSpinner()}
             style={{
-              height: '100%',
-              width: '100%',
+              height: "100%",
+              width: "100%",
               marginBottom: isShowRight ? 0 : 50,
               marginTop: 50,
             }}
             javaScriptEnabled={true}
             domStorageEnabled={true}
-            source={{uri: uri}}
+            source={{ uri: uri }}
             incognito={true}
           />
 
           {this.state.visible && (
             <ActivityIndicator
-              style={{position: 'absolute', bottom: height * 0.5, width: width}}
+              style={{
+                position: "absolute",
+                bottom: height * 0.5,
+                width: width,
+              }}
               size="large"
             />
           )}
@@ -343,35 +358,42 @@ class WebViewScreen extends Component {
             <View
               style={[
                 styles.navigationContainer,
-                {backgroundColor: utility.changeHeaderColor('#F3F3F3')},
-              ]}>
+                { backgroundColor: utility.changeHeaderColor("#F3F3F3") },
+              ]}
+            >
               <TouchableOpacity
                 style={styles.back}
-                onPress={() => this.webView.goBack()}>
+                onPress={() => this.webView.goBack()}
+              >
                 <FastImage
-                  style={{height: 25, width: 25}}
-                  resizeMode={'contain'}
-                  source={utility.changeBackButton()}></FastImage>
+                  style={{ height: 25, width: 25 }}
+                  resizeMode={"contain"}
+                  source={utility.changeBackButton()}
+                ></FastImage>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.forward}
-                onPress={() => this.webView.goForward()}>
+                onPress={() => this.webView.goForward()}
+              >
                 <FastImage
-                  style={{height: 25, width: 25}}
-                  resizeMode={'contain'}
-                  source={utility.changeForwardButton()}></FastImage>
+                  style={{ height: 25, width: 25 }}
+                  resizeMode={"contain"}
+                  source={utility.changeForwardButton()}
+                ></FastImage>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.share}
-                onPress={() => this.shareLink()}>
+                onPress={() => this.shareLink()}
+              >
                 <FastImage
-                  style={{height: 25, width: 25}}
-                  resizeMode={'contain'}
-                  source={utility.changeShareButton()}></FastImage>
+                  style={{ height: 25, width: 25 }}
+                  resizeMode={"contain"}
+                  source={utility.changeShareButton()}
+                ></FastImage>
               </TouchableOpacity>
             </View>
           )}
-          <View style={{width: '100%', position: 'absolute', top: 0}}>
+          <View style={{ width: "100%", position: "absolute", top: 0 }}>
             <Header
               title={title}
               leftImage={
@@ -380,7 +402,7 @@ class WebViewScreen extends Component {
                   : utility.changeCloseButton()
               }
               rightImage={isShowRight ? rightImage : null}
-              backgroundColor={utility.changeHeaderColor('#F3F3F3')}
+              backgroundColor={utility.changeHeaderColor("#F3F3F3")}
               redirectLeft={() => this.props.navigation.goBack()}
               redirectRight={() => {
                 if (isShowRight) {
@@ -397,9 +419,9 @@ class WebViewScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const {loading, isSuccess, librarySearchData, favorites} = state.library;
-  const {userId, userData, current_language} = state.user;
-  const {loadingShare} = state.auth;
+  const { loading, isSuccess, librarySearchData, favorites } = state.library;
+  const { userId, userData, current_language } = state.user;
+  const { loadingShare } = state.auth;
 
   return {
     loadingShare: loadingShare,

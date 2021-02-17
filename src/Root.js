@@ -1,11 +1,11 @@
-import AsyncStorage from '@react-native-community/async-storage';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import React from 'react';
-import {setJSExceptionHandler} from 'react-native-exception-handler';
-import {fromBottom, fromRight} from 'react-navigation-transitions';
-import {connect} from 'react-redux';
-import Home from '../Home';
+import AsyncStorage from "@react-native-community/async-storage";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import React, { useRef } from "react";
+import { setJSExceptionHandler } from "react-native-exception-handler";
+import { fromBottom, fromRight } from "react-navigation-transitions";
+import { connect } from "react-redux";
+import Home from "../Home";
 import {
   ChangePassword,
   Chat,
@@ -45,18 +45,19 @@ import {
   TouchID,
   Video,
   WebViewScreen,
-} from '../src/screens';
-import navigationRef from './routes/router';
-import GuestTabbarScreen from './screens/GuestTabbarScreen';
-import MainTabbarScreen from './screens/MainTabbarScreen';
+  YouTubeScreen,
+} from "../src/screens";
+import navigationRef from "./routes/router";
+import GuestTabbarScreen from "./screens/GuestTabbarScreen";
+import MainTabbarScreen from "./screens/MainTabbarScreen";
 
-const handleCustomTransition = ({scenes}) => {
+const handleCustomTransition = ({ scenes }) => {
   const nextScene = scenes[scenes.length - 1];
 
   // Custom transitions go there
   if (
-    nextScene.route.routeName === 'News' ||
-    nextScene.route.routeName === 'Filter'
+    nextScene.route.routeName === "News" ||
+    nextScene.route.routeName === "Filter"
   ) {
     return fromBottom();
   }
@@ -67,27 +68,28 @@ const Root = (props) => {
   console.disableYellowBox = true;
   let acessToken = null;
   const Stack = createStackNavigator();
+  // const navigationRef = useRef();
   const errorHandler = (e, isFatal) => {
     if (isFatal) {
       Alert.alert(
-        'Unexpected error occurred',
+        "Unexpected error occurred",
         `
-        Error: ${isFatal ? 'Fatal:' : ''} ${e.name} ${e.message}
+        Error: ${isFatal ? "Fatal:" : ""} ${e.name} ${e.message}
 
         We have reported this to our team ! Please close the app and start again!
         `,
         [
           {
-            text: 'Close',
+            text: "Close",
             onPress: () => {
               // BackAndroid.exitApp();
             },
           },
-        ],
+        ]
       );
 
-      AsyncStorage.getItem('userData').then((userdata) => {
-        let user_id = '';
+      AsyncStorage.getItem("userData").then((userdata) => {
+        let user_id = "";
         if (userdata) {
           let dataUser = JSON.parse(userdata);
           user_id = dataUser.user_id;
@@ -98,33 +100,33 @@ const Root = (props) => {
             requestParam.user_id = user_id;
             requestParam.steps = events;
             requestParam.error = `${e.name} ${e.message}`;
-            let sessionString = ' Model :' + DeviceInfo.getModel();
+            let sessionString = " Model :" + DeviceInfo.getModel();
             sessionString =
-              sessionString + ' Device type :' + DeviceInfo.getDeviceType();
-            sessionString = sessionString + ' Brand :' + DeviceInfo.getBrand();
+              sessionString + " Device type :" + DeviceInfo.getDeviceType();
+            sessionString = sessionString + " Brand :" + DeviceInfo.getBrand();
             sessionString =
-              sessionString + ' Build Number :' + DeviceInfo.getBuildNumber();
+              sessionString + " Build Number :" + DeviceInfo.getBuildNumber();
             sessionString =
-              sessionString + ' Device Locale :' + DeviceInfo.getDeviceLocale();
+              sessionString + " Device Locale :" + DeviceInfo.getDeviceLocale();
             sessionString =
               sessionString +
-              ' Device Free Storage :' +
+              " Device Free Storage :" +
               DeviceInfo.getFreeDiskStorage();
             sessionString =
-              sessionString + ' Manufacturer :' + DeviceInfo.getManufacturer();
+              sessionString + " Manufacturer :" + DeviceInfo.getManufacturer();
             sessionString =
               sessionString +
-              ' System Version :' +
+              " System Version :" +
               DeviceInfo.getSystemVersion();
             requestParam.deviceInfo = sessionString;
 
-            const axios = require('axios');
+            const axios = require("axios");
             axios({
-              method: 'post',
+              method: "post",
               url: API.API_EXCEPTION,
               data: requestParam,
               headers: {
-                'Content-Type': 'Application/json',
+                "Content-Type": "Application/json",
               },
             })
               .then((response) => {
@@ -146,7 +148,8 @@ const Root = (props) => {
           initialRouteName="Splash"
           screenOptions={{
             headerShown: false,
-          }}>
+          }}
+        >
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="Login" component={Login} />
@@ -193,6 +196,7 @@ const Root = (props) => {
           <Stack.Screen name="NotSignIn" component={NotSignIn} />
           <Stack.Screen name="RiskProfileModal" component={RiskProfileModal} />
           <Stack.Screen name="ImageScreen" component={ImageScreen} />
+          <Stack.Screen name="YouTubeScreen" component={YouTubeScreen} />
           <Stack.Screen
             name="MainTabbarScreen"
             component={MainTabbarScreen}
@@ -215,6 +219,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(
-  mapStateToProps,
+  mapStateToProps
   // mapDispatchToProps,
 )(Root);

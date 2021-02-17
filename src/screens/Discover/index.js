@@ -4,12 +4,12 @@
  * @flow
  */
 
-import React, {Component} from 'react';
+import React, { Component } from "react";
+import AsyncStorage from "@react-native-community/async-storage";
 import {
   ActivityIndicator,
   Alert,
   AppState,
-  AsyncStorage,
   Dimensions,
   FlatList,
   Modal,
@@ -19,30 +19,30 @@ import {
   ScrollView,
   TouchableOpacity,
   View,
-} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import TouchID from 'react-native-touch-id';
-import YouTube, {YouTubeStandaloneAndroid} from 'react-native-youtube';
-import {connect} from 'react-redux';
-import * as ATOMS from '../../components/atoms';
-import VideoItem from '../../components/atoms/DicoverList/index';
-import TabHeader from '../../components/atoms/TabHeader';
-import language from '../../Localization';
-import * as IMG from '../../resources/index';
+} from "react-native";
+import FastImage from "react-native-fast-image";
+import TouchID from "react-native-touch-id";
+import YouTube, { YouTubeStandaloneAndroid } from "react-native-youtube";
+import { connect } from "react-redux";
+import * as ATOMS from "../../components/atoms";
+import VideoItem from "../../components/atoms/DicoverList/index";
+import TabHeader from "../../components/atoms/TabHeader";
+import language from "../../Localization";
+import * as IMG from "../../resources/index";
 import {
   discoverList,
   discoverListLoadMore,
   discoverListPull,
   setDiscoverPostId,
-} from '../../store/Discover/actions';
-import {setLibraryPostId} from '../../store/Library/actions';
+} from "../../store/Discover/actions";
+import { setLibraryPostId } from "../../store/Library/actions";
 import {
   setPostId,
   setRedirection,
   setReportScreen,
-} from '../../store/Report/actions';
-import {setRecent, updateDeviceToken} from '../../store/User/actions';
-import * as utility from '../../Utility/util';
+} from "../../store/Report/actions";
+import { setRecent, updateDeviceToken } from "../../store/User/actions";
+import * as utility from "../../Utility/util";
 
 class Discover extends Component {
   constructor(props) {
@@ -51,13 +51,13 @@ class Discover extends Component {
     this.state = {
       // page: 1,
       openVideo: false,
-      url: '',
+      url: "",
       //loading: false, // user list loading
       isRefreshing: false, //for pull to refresh
       modalVisible: false,
       selectedItem: {},
       night_mode: false,
-      current_language: 'en',
+      current_language: "en",
       appState: AppState.currentState,
       isRedirected: false,
     };
@@ -70,9 +70,9 @@ class Discover extends Component {
   }
   openModel = (data) => {
     this.setRecent(data.post_id);
-    if (data.type == 'news') {
-      utility.recordEvent('Discover: Redirect to News');
-      this.props.navigation.navigate('News', {post_id: data.post_id});
+    if (data.type == "news") {
+      utility.recordEvent("Discover: Redirect to News");
+      this.props.navigation.navigate("News", { post_id: data.post_id });
     }
   };
   componentDidUpdate(prevProps, prevState) {
@@ -88,31 +88,31 @@ class Discover extends Component {
 
   componentWillMount() {
     //this.setupNotification()
-    utility.recordScreen('Discover Screen');
+    utility.recordScreen("Discover Screen");
   }
   allowedSupport(message, type) {
     let bioType = type;
-    AsyncStorage.setItem('allowed', '2');
+    AsyncStorage.setItem("allowed", "2");
     const ConfigObject = {
-      title: 'Fingerprint Required', // Android
-      imageColor: '#e00606', // Android
-      imageErrorColor: '#ff0000', // Android
-      sensorDescription: 'Touch sensor', // Android
-      sensorErrorDescription: 'Failed', // Android
-      cancelText: 'Cancel', // Android
-      fallbackLabel: 'Show Passcode', // iOS (if empty, then label is hidden)
+      title: "Fingerprint Required", // Android
+      imageColor: "#e00606", // Android
+      imageErrorColor: "#ff0000", // Android
+      sensorDescription: "Touch sensor", // Android
+      sensorErrorDescription: "Failed", // Android
+      cancelText: "Cancel", // Android
+      fallbackLabel: "Show Passcode", // iOS (if empty, then label is hidden)
       unifiedErrors: false, // use unified error messages (default false)
       passcodeFallback: false, // iOS - allows the device to fall back to using the passcode, if faceid/touch is not available. this does not mean that if touchid/faceid fails the first few times it will revert to passcode, rather that if the former are not enrolled, then it will use the passcode.
     };
     TouchID.authenticate(message, ConfigObject)
       .then((success) => {
-        AsyncStorage.setItem('biometryType', type);
+        AsyncStorage.setItem("biometryType", type);
         Alert.alert(
-          '',
-          bioType === '1'
-            ? 'FaceID has been activated'
-            : 'TouchID has been activated',
-          [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+          "",
+          bioType === "1"
+            ? "FaceID has been activated"
+            : "TouchID has been activated",
+          [{ text: "OK", onPress: () => console.log("OK Pressed") }]
         );
       })
       .catch((error) => {});
@@ -136,10 +136,10 @@ class Discover extends Component {
     // )
   }
   checkSupport() {
-    AsyncStorage.getItem('allowed').then((allwedBio) => {
+    AsyncStorage.getItem("allowed").then((allwedBio) => {
       if (allwedBio) {
       } else {
-        AsyncStorage.getItem('biometryType').then((response) => {
+        AsyncStorage.getItem("biometryType").then((response) => {
           // if (response) {
 
           // }
@@ -151,17 +151,17 @@ class Discover extends Component {
           TouchID.isSupported(optionalConfigObject)
             .then((biometryType) => {
               // Success code
-              if (biometryType === 'FaceID') {
-                this.allowedSupport('Do you want to activate FaceId?', '1');
-              } else if (biometryType === 'TouchID') {
-                this.allowedSupport(language.ActivateTouchIDAlert, '2');
+              if (biometryType === "FaceID") {
+                this.allowedSupport("Do you want to activate FaceId?", "1");
+              } else if (biometryType === "TouchID") {
+                this.allowedSupport(language.ActivateTouchIDAlert, "2");
               } else if (biometryType === true) {
-                this.allowedSupport(language.ActivateTouchIDAlert, '2');
+                this.allowedSupport(language.ActivateTouchIDAlert, "2");
               }
             })
             .catch((error) => {
               // Failure code
-              console.log('catch==>' + error);
+              console.log("catch==>" + error);
             });
           // }
         });
@@ -169,7 +169,7 @@ class Discover extends Component {
     });
   }
   async componentDidMount() {
-    AppState.addEventListener('change', this._handleAppStateChange);
+    AppState.addEventListener("change", this._handleAppStateChange);
     this.checkPermission();
     // this.notificationAndroid();
 
@@ -179,12 +179,12 @@ class Discover extends Component {
     this.page = this.page + 1;
     setTimeout(() => {
       this.getToken();
-      utility.recordEvent('Discover: get device token');
+      utility.recordEvent("Discover: get device token");
     }, 500);
     console.disableYellowBox = true;
   }
   componentWillUnmount() {
-    AppState.removeEventListener('change', this._handleAppStateChange);
+    AppState.removeEventListener("change", this._handleAppStateChange);
     // this.messageListener();
     // // this is where you unsubscribe
     // // if (Platform.OS === 'ios') {
@@ -223,11 +223,11 @@ class Discover extends Component {
   _handleAppStateChange = (nextAppState) => {
     if (
       this.state.appState.match(/inactive|background/) &&
-      nextAppState === 'active'
+      nextAppState === "active"
     ) {
       //alert('App has come to the foreground!');
     }
-    this.setState({appState: nextAppState});
+    this.setState({ appState: nextAppState });
   };
   async setupNotification() {
     // firebase.notifications().getInitialNotification()
@@ -409,21 +409,21 @@ class Discover extends Component {
   // }
 
   handleNavigation(notif) {
-    let type = notif.type ? notif.type : '';
-    let post_id = notif.post_id ? notif.post_id : '';
-    if (type === 'library') {
+    let type = notif.type ? notif.type : "";
+    let post_id = notif.post_id ? notif.post_id : "";
+    if (type === "library") {
       let post = JSON.parse(notif.post);
       // alert('Library' + 'post_id: '+post_id+' notif.type: '+post.type +' ')
       // Here we need to check for social post
-      let innerType = post.type ? post.type : '';
+      let innerType = post.type ? post.type : "";
 
-      if (innerType === 'video') {
+      if (innerType === "video") {
         let video_id = utility.getVideoID(post.video_link);
-        AsyncStorage.getItem('isVideo').then((isVideo) => {
+        AsyncStorage.getItem("isVideo").then((isVideo) => {
           if (isVideo) {
           } else {
             this.props.setLibraryPostId(post_id);
-            this.props.navigation.navigate('YouTubeScreen', {
+            this.props.navigation.navigate("YouTubeScreen", {
               video_id: video_id,
             });
           }
@@ -439,12 +439,12 @@ class Discover extends Component {
         // } else {
         //     this.setState({ url: post.video_link, openVideo: true })
         // }
-      } else if (innerType === 'socialpost') {
-        AsyncStorage.getItem('isSocial').then((isSocial) => {
+      } else if (innerType === "socialpost") {
+        AsyncStorage.getItem("isSocial").then((isSocial) => {
           if (isSocial) {
           } else {
             this.props.setLibraryPostId(post_id);
-            this.props.navigation.navigate('ImageScreen', {
+            this.props.navigation.navigate("ImageScreen", {
               image: post.image,
               data: post,
             });
@@ -458,11 +458,11 @@ class Discover extends Component {
         // }
         // Need to imageScreen
       } else {
-        AsyncStorage.getItem('isLibraryItem').then((isLibraryItem) => {
+        AsyncStorage.getItem("isLibraryItem").then((isLibraryItem) => {
           if (isLibraryItem) {
           } else {
             this.props.setLibraryPostId(post_id);
-            this.props.navigation.navigate('WebViewScreen', {data: post});
+            this.props.navigation.navigate("WebViewScreen", { data: post });
           }
         });
 
@@ -471,27 +471,28 @@ class Discover extends Component {
         //     this.props.navigation.navigate("WebViewScreen", { "data": post })
         // }
       }
-    } else if (type === 'discover') {
+    } else if (type === "discover") {
       // alert('discover' + 'post_id: '+post_id)
       // Here we are getting a notification for news.
-      AsyncStorage.getItem('isDiscover').then((isDiscover) => {
+      AsyncStorage.getItem("isDiscover").then((isDiscover) => {
         if (isDiscover) {
         } else {
+          console.log("sdfs", this.props);
           this.props.setDiscoverPostId(post_id);
-          this.props.navigation.navigate('News', {post_id: post_id});
+          this.props.navigation.navigate("News", { post_id: post_id });
         }
       });
       // if (this.props.dicover_post_id === '') {
       //     this.props.setDiscoverPostId(post_id)
       //     this.props.navigation.navigate("News", { "post_id": post_id })
       // }
-    } else if (type === 'report') {
-      AsyncStorage.getItem('isChat').then((isChat) => {
+    } else if (type === "report") {
+      AsyncStorage.getItem("isChat").then((isChat) => {
         if (isChat) {
           //alert('Already on Chat Screen')
         } else {
           this.props.setPostId(post_id);
-          this.props.navigation.navigate('Chat');
+          this.props.navigation.navigate("Chat");
         }
       });
       // this.props.setRedirection(true)
@@ -499,12 +500,12 @@ class Discover extends Component {
       //     this.props.setPostId(post_id)
       //     this.props.navigation.navigate('Chat')
       // }
-    } else if (type === 'admin') {
-      alert('type ==> ', JSON.stringify(type));
+    } else if (type === "admin") {
+      alert("type ==> ", JSON.stringify(type));
       let data = {};
-      data.title = '';
+      data.title = "";
       data.file_url = notif.url;
-      this.props.navigation.navigate('WebViewScreen', {data});
+      this.props.navigation.navigate("WebViewScreen", { data });
     }
   }
   getToken() {
@@ -547,13 +548,14 @@ class Discover extends Component {
       <View
         style={{
           height: 50,
-          width: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <ActivityIndicator
           style={{
-            color: '#696969',
+            color: "#696969",
           }}
         />
       </View>
@@ -561,7 +563,7 @@ class Discover extends Component {
   };
   handleLoadMore = () => {
     if (!this.state.loading && !this.props.loadingPull) {
-      utility.recordEvent('Dicover: handle loadmore');
+      utility.recordEvent("Dicover: handle loadmore");
       let discoverData = {};
       discoverData.paged = this.page;
       this.props.discoverListLoadMore(discoverData);
@@ -570,53 +572,56 @@ class Discover extends Component {
   };
 
   setRecent(post_id) {
-    this.props.setRecent({post_id: post_id});
-    utility.recordEvent('Discover: add to recent');
+    this.props.setRecent({ post_id: post_id });
+    utility.recordEvent("Discover: add to recent");
   }
   renderAndroidVideoPlayer() {
-    if (this.state.url === '') return;
+    if (this.state.url === "") return;
 
     var video_id = utility.getVideoID(this.state.url);
-    let height = Dimensions.get('screen').height;
+    let height = Dimensions.get("screen").height;
     let topMargin = height / 2 - 150;
     return (
       <View
         style={{
-          width: '100%',
-          height: '100%',
-          position: 'absolute',
-          justifyContent: 'center',
-          backgroundColor: 'transparent',
-        }}>
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          justifyContent: "center",
+          backgroundColor: "transparent",
+        }}
+      >
         <ScrollView
-          style={{backgroundColor: 'transparent'}}
+          style={{ backgroundColor: "transparent" }}
           onLayout={({
             nativeEvent: {
-              layout: {width},
+              layout: { width },
             },
           }) => {
             if (!this.state.containerMounted)
-              this.setState({containerMounted: true});
+              this.setState({ containerMounted: true });
             if (this.state.containerWidth !== width)
-              this.setState({containerWidth: width});
-          }}>
+              this.setState({ containerWidth: width });
+          }}
+        >
           <TouchableOpacity
             onPress={() => {
-              this.setState({openVideo: false});
+              this.setState({ openVideo: false });
             }}
             style={{
               height: 40,
               width: 40,
-              position: 'absolute',
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'transparent',
+              position: "absolute",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "transparent",
               borderRadius: 20,
               right: 0,
               marginTop: topMargin - 45,
-            }}>
+            }}
+          >
             <FastImage
-              style={{height: 15, width: 15}}
+              style={{ height: 15, width: 15 }}
               source={IMG.VIDEO_CLOSE}
             />
           </TouchableOpacity>
@@ -632,9 +637,9 @@ class Discover extends Component {
             style={{
               marginTop: topMargin,
               height: 300,
-              width: '100%',
-              backgroundColor: 'transparent',
-              justifyContent: 'center',
+              width: "100%",
+              backgroundColor: "transparent",
+              justifyContent: "center",
             }}
           />
         </ScrollView>
@@ -642,10 +647,10 @@ class Discover extends Component {
     );
   }
   renderVideoPlayer() {
-    if (this.state.url === '') return;
+    if (this.state.url === "") return;
 
     var video_id = utility.getVideoID(this.state.url);
-    let height = Dimensions.get('screen').height;
+    let height = Dimensions.get("screen").height;
     let topMargin = height / 2 - 150;
     return (
       <View>
@@ -653,57 +658,60 @@ class Discover extends Component {
           animationType="slide"
           transparent={true}
           visible={this.state.openVideo}
-          onRequestClose={() => {}}>
+          onRequestClose={() => {}}
+        >
           <View
             style={{
-              width: '100%',
-              height: '100%',
-              position: 'absolute',
-              backgroundColor: '#000000B3',
+              width: "100%",
+              height: "100%",
+              position: "absolute",
+              backgroundColor: "#000000B3",
             }}
           />
 
           <ScrollView
-            style={{backgroundColor: 'transparent'}}
+            style={{ backgroundColor: "transparent" }}
             onLayout={({
               nativeEvent: {
-                layout: {width},
+                layout: { width },
               },
             }) => {
               if (!this.state.containerMounted)
-                this.setState({containerMounted: true});
+                this.setState({ containerMounted: true });
               if (this.state.containerWidth !== width)
-                this.setState({containerWidth: width});
-            }}>
+                this.setState({ containerWidth: width });
+            }}
+          >
             <TouchableOpacity
               onPress={() => {
-                this.setState({openVideo: false});
+                this.setState({ openVideo: false });
               }}
               style={{
                 height: 40,
                 width: 40,
-                position: 'absolute',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'transparent',
+                position: "absolute",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "transparent",
                 borderRadius: 20,
                 right: 0,
                 marginTop: topMargin - 45,
-              }}>
+              }}
+            >
               <FastImage
-                style={{height: 15, width: 15}}
+                style={{ height: 15, width: 15 }}
                 source={IMG.VIDEO_CLOSE}
               />
             </TouchableOpacity>
-            {Platform.OS === 'android' ? (
+            {Platform.OS === "android" ? (
               YouTubeStandaloneAndroid.playVideo({
-                apiKey: 'AIzaSyDmq9YIU3vOEuBBp3qdfa1mNYieuqnQFXQ', // Your YouTube Developer API Key
+                apiKey: "AIzaSyDmq9YIU3vOEuBBp3qdfa1mNYieuqnQFXQ", // Your YouTube Developer API Key
                 videoId: video_id, // YouTube video ID
                 autoplay: true, // Autoplay the video
                 startTime: 0,
                 lightboxMode: true, // Starting point of video (in seconds) })
               })
-                .then(() => console.log('Standalone Player Exited'))
+                .then(() => console.log("Standalone Player Exited"))
                 .catch((errorMessage) => console.error(errorMessage))
             ) : (
               <YouTube
@@ -717,8 +725,8 @@ class Discover extends Component {
                 style={{
                   marginTop: topMargin,
                   height: 300,
-                  width: '100%',
-                  backgroundColor: 'transparent',
+                  width: "100%",
+                  backgroundColor: "transparent",
                 }}
               />
             )}
@@ -729,36 +737,41 @@ class Discover extends Component {
   }
 
   renderVideoPlayer1() {
-    if (this.state.url === '') return;
+    if (this.state.url === "") return;
 
     var video_id = utility.getVideoID(this.state.url);
-    let height = Dimensions.get('screen').height;
+    let height = Dimensions.get("screen").height;
     let topMargin = height / 2 - 150;
     return (
       <View
         style={{
-          width: '100%',
-          height: '100%',
-          position: 'absolute',
-          justifyContent: 'center',
-          backgroundColor: 'transparent',
-        }}>
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          justifyContent: "center",
+          backgroundColor: "transparent",
+        }}
+      >
         <TouchableOpacity
           onPress={() => {
-            this.setState({openVideo: false});
+            this.setState({ openVideo: false });
           }}
           style={{
             height: 40,
             width: 40,
-            position: 'absolute',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'transparent',
+            position: "absolute",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "transparent",
             borderRadius: 20,
             right: 0,
             marginTop: topMargin - 45,
-          }}>
-          <FastImage style={{height: 15, width: 15}} source={IMG.VIDEO_CLOSE} />
+          }}
+        >
+          <FastImage
+            style={{ height: 15, width: 15 }}
+            source={IMG.VIDEO_CLOSE}
+          />
         </TouchableOpacity>
         <YouTube
           ref={(component) => {
@@ -771,8 +784,8 @@ class Discover extends Component {
           style={{
             marginTop: topMargin,
             height: 300,
-            width: '100%',
-            backgroundColor: 'transparent',
+            width: "100%",
+            backgroundColor: "transparent",
           }}
         />
       </View>
@@ -820,25 +833,27 @@ class Discover extends Component {
     return (
       <VideoItem
         video={video.item}
-        list={'discover'}
+        list={"discover"}
         // type={video.type}
         userId={this.props.userId}
         onPress={() => {
           let type = video.item.type;
-          console.log('Typee==>', type);
+          console.log("Typee==>", type);
 
-          if (type === 'flyer' || type === 'flyers') {
-            this.props.navigation.navigate('WebViewScreen', {data: video.item});
-          } else if (type !== 'video') {
+          if (type === "flyer" || type === "flyers") {
+            this.props.navigation.navigate("WebViewScreen", {
+              data: video.item,
+            });
+          } else if (type !== "video") {
             this.openModel(video.item);
           } else {
             let video_id = utility.getVideoID(video.item.video_link);
-            this.props.navigation.navigate('YouTubeScreen', {
+            this.props.navigation.navigate("YouTubeScreen", {
               video_id: video_id,
             });
 
             // this.setState({ url: video.item.video_link, openVideo: true })
-            utility.recordEvent('Discover: Open video in modal');
+            utility.recordEvent("Discover: Open video in modal");
 
             // if (video.item.video_link.indexOf('youtu') > -1 && Platform.OS !== 'ios') {
             //     Linking.openURL(video.item.video_link)
@@ -849,7 +864,7 @@ class Discover extends Component {
             // }
           }
           this.setRecent(video.item.post_id);
-          utility.recordEvent('Discover: add to recent post');
+          utility.recordEvent("Discover: add to recent post");
         }}
       />
     );
@@ -868,11 +883,12 @@ class Discover extends Component {
       return (
         <View
           style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'red',
-          }}>
-          <ActivityIndicator style={{color: '#000'}} />
+            width: "100%",
+            height: "100%",
+            backgroundColor: "red",
+          }}
+        >
+          <ActivityIndicator style={{ color: "#000" }} />
         </View>
       );
     }
@@ -880,17 +896,25 @@ class Discover extends Component {
       <SafeAreaView
         style={{
           flex: 1,
-          backgroundColor: utility.changeHeaderColor('#F3F3F3'),
-        }}>
-        <View
+          backgroundColor: utility.changeHeaderColor("#F3F3F3"),
+        }}
+      >
+        {/* <View
           style={{
             flex: 1,
-            backgroundColor: utility.changeBackgroundColor('#FFFFFF'),
+            backgroundColor: utility.changeBackgroundColor("#FFFFFF"),
             paddingBottom: 50,
-          }}>
+          }}
+        > */}
+        <View
+          style={{
+            backgroundColor: utility.changeBackgroundColor("#FFFFFF"),
+            paddingBottom: 1,
+          }}
+        >
           <TabHeader
             title={language.Discover}
-            backgroundColor={utility.changeHeaderColor('#F3F3F3')}
+            backgroundColor={utility.changeHeaderColor("#F3F3F3")}
           />
           <FlatList
             data={this.props.data.posts}
@@ -902,7 +926,7 @@ class Discover extends Component {
               />
             }
             ItemSeparatorComponent={() => (
-              <View style={{height: 0.5, backgroundColor: '#E5E5E5'}} />
+              <View style={{ height: 0.5, backgroundColor: "#E5E5E5" }} />
             )}
             ListFooterComponent={this.renderFooter.bind(this)}
             onEndReachedThreshold={0.4}
@@ -929,10 +953,10 @@ const mapStateToProps = (state) => {
     loadingPull,
     dicover_post_id,
   } = state.discover;
-  const {isConnected} = state.auth;
-  const {post_id, isRedirected, isReportScreen} = state.report;
-  const {library_post_id} = state.library;
-  const {userId, userData, current_language} = state.user;
+  const { isConnected } = state.auth;
+  const { post_id, isRedirected, isReportScreen } = state.report;
+  const { library_post_id } = state.library;
+  const { userId, userData, current_language } = state.user;
   return {
     isConnected,
     post_id,

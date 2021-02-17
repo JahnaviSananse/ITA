@@ -1,10 +1,10 @@
-import NetInfo from '@react-native-community/netinfo';
-import React, {Component} from 'react';
-import {Animated, AppState, Easing, View} from 'react-native';
-import {connect} from 'react-redux';
-import language from '../../../Localization';
-import {updateInternetStatus} from '../../../store/Auth/actions';
-import styles from './index.styles';
+import NetInfo from "@react-native-community/netinfo";
+import React, { Component } from "react";
+import { Animated, AppState, Easing, View } from "react-native";
+import { connect } from "react-redux";
+import language from "../../../Localization";
+import { updateInternetStatus } from "../../../store/Auth/actions";
+import styles from "./index.styles";
 class OfflineBar extends Component {
   animationConstants = {
     DURATION: 800,
@@ -19,19 +19,19 @@ class OfflineBar extends Component {
 
   state = {
     isConnected: true,
-    offlineText: '',
+    offlineText: "",
   };
   _handleAppStateChange = (nextAppState) => {
-    if (nextAppState === 'active') {
-      NetInfo.fetch().then(this.setNetworkStatus);
+    if (nextAppState === "active") {
+      // NetInfo.fetch().then(this.setNetworkStatus);
     }
   };
   componentWillMount() {
-    NetInfo.addEventListener('change', this.setNetworkStatus);
+    // NetInfo.addEventListener('change', this.setNetworkStatus);
     // setTimeout(() => {
     //   NetInfo.isConnected.fetch().then(this.setNetworkStatus);
     // }, 500);
-    AppState.addEventListener('change', this._handleAppStateChange);
+    AppState.addEventListener("change", this._handleAppStateChange);
     this.animation = new Animated.Value(0);
   }
   componentWillUnMount() {
@@ -72,9 +72,9 @@ class OfflineBar extends Component {
       outputRange: this.animationConstants.OUTPUT_RANGE,
     });
     const animationStyle = {
-      transform: [{translateX: interpolated}],
+      transform: [{ translateX: interpolated }],
     };
-    const {offlineText = language.InternetConnection} = this.props;
+    const { offlineText = language.InternetConnection } = this.props;
 
     if (this.props.status !== undefined) {
       return this.props.status === 0 ? (
@@ -102,10 +102,10 @@ class OfflineBar extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const {isConnected} = state.auth;
+  const { isConnected } = state.auth;
   return {
     isConnected,
   };
 };
 
-export default connect(mapStateToProps, {updateInternetStatus})(OfflineBar);
+export default connect(mapStateToProps, { updateInternetStatus })(OfflineBar);
