@@ -43,6 +43,7 @@ class Setting extends Component {
       switchValue: this.props.userData.night_mode === 1 ? true : false,
     });
   }
+
   toggleSwitch = (value) => {
     utility.recordEvent("Setting : NightMode switch toggle");
     this.setState({ switchValue: value });
@@ -290,10 +291,11 @@ class Setting extends Component {
             leftImage={utility.changeCloseButton()}
             backgroundColor={utility.changeHeaderColor("#F3F3F3")}
             redirectLeft={() => {
-              console.log("this.props=======>>>>", this.props);
-              this.props.navigation.replace("MainTabbarScreen");
+              // console.log("this.props=======>>>>", this.props);
+              this.props.navigation.replace("MainTabbarScreen", {});
             }}
           />
+
           <SectionList
             contentContainerStyle={{ paddingBottom: 100 }}
             style={{

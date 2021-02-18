@@ -62,9 +62,9 @@ class Product extends Component {
     let request = {};
     request.category_id = this.state.category_id;
     request.paged = this.state.paged;
-    // console.log("getProduct", this.props);
+    console.log("getProduct", this.props);
     this.props.getProduct(request);
-    this.state.paged = 2;
+    // this.state.paged = 2;
   }
   getProductLoadMore() {
     utility.recordEvent("SocialPost : getProduct");

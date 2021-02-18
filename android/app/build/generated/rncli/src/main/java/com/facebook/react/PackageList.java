@@ -21,6 +21,8 @@ import org.reactnative.maskedview.RNCMaskedViewPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 // @react-native-community/viewpager
 import com.reactnativecommunity.viewpager.RNCViewPagerPackage;
+// @react-native-firebase/app
+import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 // react-native-device-info
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 // react-native-exception-handler
@@ -113,6 +115,7 @@ public class PackageList {
       new RNCMaskedViewPackage(),
       new NetInfoPackage(),
       new RNCViewPagerPackage(),
+      new ReactNativeFirebaseAppPackage(),
       new RNDeviceInfo(),
       new ReactNativeExceptionHandlerPackage(),
       new FastImageViewPackage(),

@@ -1,5 +1,8 @@
-import React from 'react';
-import Home from './Home';
+import React from "react";
+import Home from "./Home";
+import React, { useEffect } from "react";
+import { Alert } from "react-native";
+import messaging from "@react-native-firebase/messaging";
 
 // class App extends PureComponent<IAppProps> {
 //   componentDidMount() {
@@ -12,7 +15,11 @@ import Home from './Home';
 
 const App = () => {
   // useEffect(() => {
-  //   Orientation.lockToPortrait();
+  //   const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+  //     console.log("A new FCM message arrived!", JSON.stringify(remoteMessage));
+  //   });
+
+  //   return unsubscribe;
   // }, []);
   return <Home />;
 };
